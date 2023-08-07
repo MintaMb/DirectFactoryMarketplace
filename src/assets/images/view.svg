@@ -1,0 +1,16 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456 384" width="456" height="384">
+	<title>view-svg</title>
+	<style>
+		.s0 { fill: #5302ff } 
+	</style>
+	<filter id="f0">
+		<feFlood flood-color="#00247a" flood-opacity="1" />
+		<feBlend mode="normal" in2="SourceGraphic"/>
+		<feComposite in2="SourceAlpha" operator="in" />
+	</filter>
+	<g id="Layer" filter="url(#f0)">
+		<path id="Layer" fill-rule="evenodd" className="s0" d="m455.3 190.7q0.7 2.2 0.7 4.6 0 2.4-0.7 4.7-0.8 2.3-2.2 4.2c-4.1 5.6-101.1 136.4-225.1 136.4-124 0-221-130.8-225.1-136.4q-1.4-1.9-2.2-4.2-0.7-2.3-0.7-4.7 0-2.4 0.7-4.6 0.8-2.3 2.2-4.3c4.1-5.5 101.1-136.4 225.1-136.4 124 0 221 130.9 225.1 136.4q1.4 2 2.2 4.3zm-33.5 4.6c-23.4-28.4-102.5-115.2-193.8-115.2-91.5 0-170.4 86.8-193.8 115.2 23.4 28.4 102.5 115.3 193.8 115.3 91.5 0 170.4-86.8 193.8-115.3z"/>
+		<path id="Layer" fill-rule="evenodd" className="s0" d="m228 285.5c-49.9 0-90.2-40.3-90.2-90.2 0-49.9 40.3-90.2 90.2-90.2 49.9 0 90.2 40.3 90.2 90.2 0 49.9-40.3 90.2-90.2 90.2zm60.1-90.2c0-33.2-26.8-60.1-60.1-60.1-33.3 0-60.1 26.9-60.1 60.1 0 33.3 26.8 60.2 60.1 60.2 33.3 0 60.1-26.9 60.1-60.2z"/>
+		<path id="Shape 1" className="s0" d=""/>
+	</g>
+</svg>

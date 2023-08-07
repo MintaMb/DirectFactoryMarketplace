@@ -1,0 +1,39 @@
+// on boarding
+
+.paddword-input {
+  position: relative;
+
+  .form-group-append {
+    position: absolute;
+    top: 1.5rem;
+    right: 1rem;
+    cursor: pointer;
+
+    img {
+      width: 23px;
+    }
+  }
+}
+
+// spinner
+.sweet-loading {
+  background: #ffffff42;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 999999;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    position: relative;
+  }
+
+  img {
+    width: 200px;
+  }
+}

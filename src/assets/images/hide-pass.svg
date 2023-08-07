@@ -1,0 +1,16 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456 384" width="456" height="384">
+	<title>view-svg</title>
+	<defs>
+		<image width="456" height="384" id="img1" href="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDQ1NiAzODQiIHdpZHRoPSI0NTYiIGhlaWdodD0iMzg0Ij4KCTx0aXRsZT52aWV3LXN2ZzwvdGl0bGU+Cgk8c3R5bGU+CgkJLnMwIHsgZmlsbDogIzUzMDJmZiB9IAoJPC9zdHlsZT4KCTxnIGlkPSJMYXllciI+CgkJPHBhdGggaWQ9IkxheWVyIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsYXNzPSJzMCIgZD0ibTQ1NS4zIDE5MC43cTAuNyAyLjIgMC43IDQuNiAwIDIuNC0wLjcgNC43LTAuOCAyLjMtMi4yIDQuMmMtNC4xIDUuNi0xMDEuMSAxMzYuNC0yMjUuMSAxMzYuNC0xMjQgMC0yMjEtMTMwLjgtMjI1LjEtMTM2LjRxLTEuNC0xLjktMi4yLTQuMi0wLjctMi4zLTAuNy00LjcgMC0yLjQgMC43LTQuNiAwLjgtMi4zIDIuMi00LjNjNC4xLTUuNSAxMDEuMS0xMzYuNCAyMjUuMS0xMzYuNCAxMjQgMCAyMjEgMTMwLjkgMjI1LjEgMTM2LjRxMS40IDIgMi4yIDQuM3ptLTMzLjUgNC42Yy0yMy40LTI4LjQtMTAyLjUtMTE1LjItMTkzLjgtMTE1LjItOTEuNSAwLTE3MC40IDg2LjgtMTkzLjggMTE1LjIgMjMuNCAyOC40IDEwMi41IDExNS4zIDE5My44IDExNS4zIDkxLjUgMCAxNzAuNC04Ni44IDE5My44LTExNS4zeiIvPgoJCTxwYXRoIGlkPSJMYXllciIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGFzcz0iczAiIGQ9Im0yMjggMjg1LjVjLTQ5LjkgMC05MC4yLTQwLjMtOTAuMi05MC4yIDAtNDkuOSA0MC4zLTkwLjIgOTAuMi05MC4yIDQ5LjkgMCA5MC4yIDQwLjMgOTAuMiA5MC4yIDAgNDkuOS00MC4zIDkwLjItOTAuMiA5MC4yem02MC4xLTkwLjJjMC0zMy4yLTI2LjgtNjAuMS02MC4xLTYwLjEtMzMuMyAwLTYwLjEgMjYuOS02MC4xIDYwLjEgMCAzMy4zIDI2LjggNjAuMiA2MC4xIDYwLjIgMzMuMyAwIDYwLjEtMjYuOSA2MC4xLTYwLjJ6Ii8+CgkJPHBhdGggaWQ9IlNoYXBlIDEiIGNsYXNzPSJzMCIgZD0ibS0zLTY3Ii8+CgkJPHBhdGggaWQ9IlNoYXBlIDQiIGNsYXNzPSJzMCIgZD0ibTI4LjcgNS43YzYuNC02LjcgMTcuMS03IDIzLjgtMC41bDM2NS42IDM0OS43YzYuNyA2LjUgNi45IDE3LjIgMC41IDIzLjktNi40IDYuNy0xNy4xIDYuOS0yMy45IDAuNWwtMzY1LjUtMzQ5LjhjLTYuNy02LjQtNy0xNy4xLTAuNS0yMy44eiIvPgoJPC9nPgo8L3N2Zz4="/>
+	</defs>
+	<style>
+	</style>
+	<filter id="f0">
+		<feFlood flood-color="#00247a" flood-opacity="1" />
+		<feBlend mode="normal" in2="SourceGraphic"/>
+		<feComposite in2="SourceAlpha" operator="in" />
+	</filter>
+	<g id="Layer" filter="url(#f0)">
+		<use id="hide-pass" href="#img1" transform="matrix(1,0,0,1,0,0)"/>
+	</g>
+</svg>
