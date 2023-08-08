@@ -14,6 +14,10 @@ import CreateProduct from "./component/product/CreateProduct";
 import InventoryListing from "./component/inventory/InventoryListing";
 import User from "./component/users/User";
 import OrderHistory from "./component/stock_history/OrderHistory";
+import Order from "./component/order/Order";
+import ManualOrderInput from "./component/order/ManualOrderInput";
+import CreateOrder from "./component/order/CreateOrder";
+import Orderdetails from "./component/order/Orderdetails";
 export const GlobalContext = createContext(null);
 
 function App() {
@@ -55,6 +59,19 @@ function App() {
                 <Route
                   path="inventory/stock-order-history"
                   element={<OrderHistory />}
+                />
+                <Route path="/order" element={<Order />} />
+                <Route
+                  path="/order/manual-order-input"
+                  element={<ManualOrderInput />}
+                />
+                <Route
+                  path="/order/manual-order-input/create-order"
+                  element={<CreateOrder />}
+                />
+                <Route
+                  path="/orders/manual-order-input/order-details"
+                  element={<Orderdetails />}
                 />
               </Route>
             </Routes>
