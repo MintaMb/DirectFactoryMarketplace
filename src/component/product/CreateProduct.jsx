@@ -17,21 +17,39 @@ const CreateProduct = () => {
   const { id } = useParams();
   const [rows, setRows] = useState([{}]);
   const [editProduct, seteditProduct] = useState();
+  const [eventImage, setEventImage] = useState([]);
   //===================  create product post api
   const productForm = async (data) => {
     try {
       let formData = new FormData();
-      data = {
-        ...data,
-      };
-      Object.keys(data)?.forEach((item) => {
-        formData.append(`${item}`, data[item]);
-      });
-      console.log(data, "data");
-      const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/api/add_product${
-          id ? "/" + id : ""
-        }`,
+      formData.append("product_id", id);
+      formData.append("name", watch()?.name);
+      formData.append("description", watch()?.description);
+      formData.append("sku", watch()?.sku);
+      formData.append("unit", watch()?.unit);
+      formData.append("cost", watch()?.cost);
+      formData.append("sale_price", watch()?.sale_price);
+      formData.append("capacity", watch()?.capacity);
+      console.log(watch()?.id, " watch()?.id");
+      // Append images to formData
+      // =====Event images
+      if (eventImage?.length) {
+        eventImage?.forEach((itm, i) => {
+          if (typeof itm?.file === "object") {
+            formData.append(`image[${i}]`, itm?.file);
+          }
+        });
+      }
+      // Append variations data to formData
+      if (rows.length > 0 || formData.row) {
+        formData.append("variations", JSON.stringify(rows));
+      }
+      const apiUrl = id
+        ? `${process.env.REACT_APP_BASE_URL}/api/update_product`
+        : `${process.env.REACT_APP_BASE_URL}/api/add_product`;
+            const response = await fetch(apiUrl,
+        // `${process.env.REACT_APP_BASE_URL}${id ? `/api/update_product` : `api/add_product`}`,
+        // `${process.env.REACT_APP_BASE_URL}/api/add_product`,
         {
           headers: {
             Accept: "application/json",
@@ -43,7 +61,7 @@ const CreateProduct = () => {
       );
       if (response?.status === 200) {
         reset();
-        setTimeout(() => {}, 500);
+        setEventImage([]);
         navigate("/inventory");
         toast.success(
           `${
@@ -56,31 +74,22 @@ const CreateProduct = () => {
         toast.success(`Session expired !`);
         navigate("/");
       }
-      // for error msgs
-      else {
-        const data = await response.json();
-        if (data?.errors) {
-          let error = Object.keys(data?.errors)?.reverse();
-          for (let i = 0; i <= error?.length; i++) {
-            if (data?.errors[error[i]]?.length) {
-              toast.error(data?.errors[error[i]][0], {
-                autoClose: 5000,
-              });
-            }
-          }
-        }
+      if (response?.status >= 401) {
+         const data = await response.json();
+         toast.error(data?.message, {
+           autoClose: 5000,
+         });
       }
+      // for error msgs
     } catch (errors) {
       console.error("An error occurred:", errors);
     }
   };
   // ================== get product list api
-  const offerListing = async () => {
+  const getProductListing = async () => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/api/product_detail${
-          id ? "/" + id : ""
-        }`,
+        `${process.env.REACT_APP_BASE_URL}/api/product_detail/${id}`,
         {
           headers: {
             Accept: "application/json",
@@ -89,11 +98,9 @@ const CreateProduct = () => {
           method: "GET",
         }
       );
-
       if (response?.status === 200) {
         const data = await response.json(); // Fixed typo "response.jso" to "response.json()"
         seteditProduct(data?.data); // Assuming "data.data" is where the user details are in the API response
-        // debugger
         setValue("name", data?.data?.name);
         setValue("description", data?.data?.description);
         setValue("sku", data?.data?.sku);
@@ -108,10 +115,27 @@ const CreateProduct = () => {
       console.error("Error fetching product details:", error);
     }
   };
-
   useEffect(() => {
-    offerListing();
+    if(id){
+    getProductListing();}
   }, []);
+  // useEffect(() => {
+  //   if (editProduct && id) {
+  //     setValue("name", editProduct.name);
+  //     setValue("description", editProduct.description);
+  //     setValue("sku", editProduct.sku);
+  //     setValue("unit", editProduct.unit);
+  //     setValue("images", editProduct.images);
+  //     setValue("cost", editProduct.cost);
+  //     setValue("sale_price", editProduct.sale_price);
+  //     setValue("capacity", editProduct.capacity);
+  //     setEventImage(editProduct.event_pictures);
+  //     if (editProduct.variations) {
+  //       setRows(editProduct.variations);
+  //     }
+  //     console.log(editProduct.variations, "haha");
+  //   }
+  // }, [editProduct, id]);
   // ==================== variation form
   const handleChange = (idx) => (e) => {
     const { name, value } = e.target;
@@ -123,16 +147,42 @@ const CreateProduct = () => {
     setRows(updatedRows);
   };
 
+  // const handleAddRow = () => {
+  //   const newItem = {
+  //     name: "",
+  //     mobile: "",
+  //   };
+  //   setRows([...rows, newItem]);
+  // };
+
+  // const handleRemoveRow = () => {
+  //   setRows(rows.slice(0, -1));
+  // };
+
+  // const handleRemoveSpecificRow = (idx) => () => {
+  //   const updatedRows = [...rows];
+  //   updatedRows.splice(idx, 1);
+  //   setRows(updatedRows);
+  // };
+
+  // const handleChange = (idx) => (e) => {
+  //   const { name, value } = e.target;
+  //   const updatedRows = [...rows];
+  //   updatedRows[idx] = {
+  //     ...updatedRows[idx],
+  //     [name]: value,
+  //   };
+  //   setRows(updatedRows);
+  // };
+
   const handleAddRow = () => {
-    const newItem = {
-      name: "",
-      mobile: "",
-    };
-    setRows([...rows, newItem]);
+    setRows([...rows, {}]);
   };
 
   const handleRemoveRow = () => {
-    setRows(rows.slice(0, -1));
+    if (rows.length > 1) {
+      setRows(rows.slice(0, -1));
+    }
   };
 
   const handleRemoveSpecificRow = (idx) => () => {
@@ -140,6 +190,29 @@ const CreateProduct = () => {
     updatedRows.splice(idx, 1);
     setRows(updatedRows);
   };
+  // =================== event multi images selector
+  const handleImage = (e) => {
+    const data = e.target.files;
+    let totalPhotosLength = data.length + eventImage?.length;
+    if (totalPhotosLength > 4) {
+      toast.error("Only 4 images are accepted.");
+      return;
+    }
+    for (let i of e.target.files) {
+      if (i.size > 1e6) {
+        toast.error("Image size too large,upload upto 1MB.", {
+          autoClose: 3000,
+        });
+        return;
+      } else {
+        // debugger
+        setEventImage((prev) => {
+          return [...prev, { file: i }];
+        });
+      }
+    }
+  };
+  console.log(eventImage);
   return (
     <>
       skdkjlksj
@@ -177,7 +250,7 @@ const CreateProduct = () => {
                               </p>
                             )}
                           </div>
-                          <div className="col-lg-12 mb-2">
+                          {/* <div className="col-lg-12 mb-2">
                             <label>
                               Product Description{" "}
                               <span className="text-danger">*</span>
@@ -198,10 +271,35 @@ const CreateProduct = () => {
                             {errors?.description && (
                               <p role="alert" className="alert-msg text-danger">
                                 {errors?.description?.message}{" "}
-                                {/* Corrected field name here */}
+                                Corrected field name here
+                              </p>
+                            )}
+                          </div> */}
+                          <div className="col-lg-12 mb-2">
+                            <label>
+                              Product Description{" "}
+                              <span className="text-danger">*</span>
+                            </label>
+                            <Controller
+                              name="description"
+                              control={control}
+                              rules={{ required: "Description is required" }}
+                              render={({ field }) => (
+                                <textarea
+                                  className="form-control"
+                                  {...field}
+                                  placeholder="typehere"
+                                  defaultValue={editProduct?.description} // Set the defaultValue for the textarea here
+                                ></textarea>
+                              )}
+                            />
+                            {errors?.description && (
+                              <p role="alert" className="alert-msg text-danger">
+                                {errors?.description?.message}
                               </p>
                             )}
                           </div>
+
                           <div className="col-lg-4 mb-2">
                             <label>
                               Product SKU <span className="text-danger">*</span>
@@ -244,7 +342,7 @@ const CreateProduct = () => {
                               Upload Product Images{" "}
                               <span className="text-danger">*</span>
                             </label>
-                            <Controller
+                            {/* <Controller
                               name="images"
                               control={control}
                               defaultValue={[]}
@@ -261,11 +359,21 @@ const CreateProduct = () => {
                                   />
                                 </div>
                               )}
+                            /> */}
+                            <input
+                              id="eventImages"
+                              onChange={(e) => handleImage(e)}
+                              type="file"
+                              name="files[]"
+                              data-multiple-caption="{count} files selected"
+                              multiple
+                              accept=".jpg,.png,.jpeg "
+                              className="form-control product_image"
                             />
                             {errors?.images && (
                               <p role="alert" className="alert-msg text-danger">
                                 {errors?.images?.message}{" "}
-                                {/* Corrected field name here */}
+                                {/ Corrected field name here /}
                               </p>
                             )}
                           </div>
@@ -364,6 +472,7 @@ const CreateProduct = () => {
                                   <tr id="addr0" key={idx}>
                                     <td>
                                       <input
+                                        name="name"
                                         onChange={handleChange(idx)}
                                         value={item.name}
                                         type="text"
@@ -374,17 +483,19 @@ const CreateProduct = () => {
                                     <td>
                                       <input
                                         type="text"
+                                        name="cost_price"
                                         onChange={handleChange(idx)}
-                                        value={item.name}
+                                        value={item.cost_price}
                                         className="form-control variant_cost_price"
                                         placeholder="Enter Variant Cost Price..."
                                       />
                                     </td>
                                     <td>
                                       <input
+                                        name="sale_price"
                                         type="text"
                                         onChange={handleChange(idx)}
-                                        value={item.name}
+                                        value={item.sale_price}
                                         className="form-control variant_sale_price"
                                         placeholder="Enter Variant Sale Price..."
                                       />
@@ -392,8 +503,9 @@ const CreateProduct = () => {
                                     <td>
                                       <input
                                         type="text"
+                                        name="stock"
                                         onChange={handleChange(idx)}
-                                        value={item.name}
+                                        value={item.stock}
                                         className="form-control product_brand"
                                         placeholder="Enter Variant SKU..."
                                       />

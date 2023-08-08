@@ -10,7 +10,9 @@ const User = () => {
   const [userData, setUserData] = useState([]);
   const id = useParams();
   const navigate = useNavigate();
+  const [postModal, setPostModal] = useState(false);
   const { setSpinner, spinner } = useContext(GlobalContext);
+  const [deleteShow, setDShow] = useState(false);
   const permissions = [
     { name: "Inventory", value: "inventory" },
     { name: "Order", value: "order" },
@@ -22,11 +24,9 @@ const User = () => {
   ];
   const {
     register,
-    watch,
     handleSubmit,
     reset,
     setValue,
-    control,
     formState: { errors },
   } = useForm({ mode: "all" });
   // ================== get list api
@@ -59,9 +59,6 @@ const User = () => {
       setSpinner(false);
     }
   };
-  useEffect(() => {
-    userListing();
-  }, []);
   console.log(userData, "userData");
   // ==================== add new user
   const userForm = async (data) => {
@@ -79,9 +76,8 @@ const User = () => {
         password: data.password,
         permissions: formattedPermissionsString,
       };
-
-      const formData = new FormData();
-      formData.append("data", JSON.stringify(formattedData));
+      // const formData = new FormData();
+      // formData.append("data", JSON.stringify(formattedData));
       console.log(data, "data");
       const response = await fetch(
         `${process.env.REACT_APP_BASE_URL}/api/add_client_user`,
@@ -91,7 +87,7 @@ const User = () => {
             Authorization: `Bearer ${localStorage.getItem("Token")}`,
           },
           method: "POST",
-          body: formData,
+          body: JSON.stringify(formattedData),
         }
       );
       if (response?.status === 200) {
@@ -116,7 +112,85 @@ const User = () => {
       console.error("An error occurred:", errors);
     }
   };
+  // ====== edit user
+  const [getUserData, setGetUserData] = useState();
+  console.log(getUserData, id, "userId");
+  const editUser = async (id) => {
+    setSpinner(true);
+    let token = localStorage.getItem("Token");
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/api/edit_client_user/${id}`,
+        {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          method: "GET",
+        }
+      );
+      if (response?.status === 200) {
+        reset();
+        const data = await response.json();
+        const formattedPermissions = JSON.stringify(data?.data?.permissions); // Convert the permissions array to a JSON string
+        const formattedPermissionsString = formattedPermissions.replace(
+          /"/g,
+          "'"
+        );
+        setGetUserData(data?.data);
+        setValue("first_name", data?.data?.first_name);
+        setValue("email", data?.data?.email);
+        setValue("phone", data?.data?.phone);
+        setValue("password", data?.data?.password);
+        setValue("permissions", data?.data?.formattedPermissionsString);
 
+        setSpinner(false);
+      } else {
+        const data = await response.json();
+        toast.error(data?.message, {
+          autoClose: 5000,
+        });
+        setSpinner(false);
+      }
+    } catch (error) {
+      setSpinner(false);
+    }
+  };
+  useEffect(() => {
+    userListing();
+  }, []);
+
+  // ============== delete user
+  const [userId, setUserId] = useState([]);
+  const deleteUser = async () => {
+    setSpinner(true);
+    let token = localStorage.getItem("Token");
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/api/status_client_user/delete/${userId}`,
+        {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          method: "GET",
+        }
+      );
+      if (response?.status === 200) {
+        const data = await response.json();
+        toast.success("User deleted");
+        userListing();
+        setSpinner(false);
+      } else {
+        const data = await response.json();
+        toast.error(data?.message, {
+          autoClose: 5000,
+        });
+      }
+    } catch (error) {
+      setSpinner(false);
+    }
+  };
   return (
     <>
       {spinner && <Spinner />}
@@ -171,6 +245,7 @@ const User = () => {
                               </thead>
                               <tbody>
                                 {userData?.map((item, index) => {
+                                  console.log(item, "item");
                                   return (
                                     <tr key={index}>
                                       <td>{index + 1}</td>
@@ -182,11 +257,19 @@ const User = () => {
                                       <td>{item?.phone ? item?.phone : "-"}</td>
                                       <td>{item?.email ? item?.email : "-"}</td>
                                       <td>
-                                        {item?.permissions
+                                        {/* {item?.permissions
                                           ? item.permissions
                                               .replace(/"/g, "") // Remove double quotes
                                               .replace(/^\[|\]$/g, "") // Remove square brackets
                                               .split(",") // Split into an array
+                                              .map((permission) =>
+                                                permission.trim()
+                                              ) // Remove spaces around each element
+                                              .join(", ")
+                                          : "-"} */}
+
+                                        {item?.permissions
+                                          ? item.permissions
                                               .map((permission) =>
                                                 permission.trim()
                                               ) // Remove spaces around each element
@@ -198,6 +281,10 @@ const User = () => {
                                           className="btn btn-primary btn-sm"
                                           data-bs-toggle="modal"
                                           data-bs-target="#delete-alert-modal"
+                                          onClick={() => {
+                                            setDShow(true);
+                                            setUserId(item?._id);
+                                          }}
                                         >
                                           <span className="mdi mdi-trash-can-outline"></span>{" "}
                                           Delete
@@ -205,7 +292,11 @@ const User = () => {
                                         <button
                                           className="btn btn-primary btn-sm mx-1"
                                           data-bs-toggle="modal"
-                                          data-bs-target="#edit-user-model"
+                                          data-bs-target="#create-user-model"
+                                          onClick={() => {
+                                            setPostModal(true);
+                                            editUser(item?._id);
+                                          }}
                                         >
                                           <span className="mdi mdi-square-edit-outline"></span>{" "}
                                           Edit
@@ -247,6 +338,10 @@ const User = () => {
                   type="button"
                   className="btn btn-light my-2"
                   data-bs-dismiss="modal"
+                  onClick={() => {
+                    setDShow(false);
+                    deleteUser();
+                  }}
                 >
                   Confirm
                 </button>
@@ -431,122 +526,6 @@ const User = () => {
                   &nbsp;&nbsp;
                   <button
                     className="btn btn-outline-danger"
-                    data-bs-dismiss="modal"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        id="edit-user-model"
-        class="modal fade"
-        tabindex="-1"
-        role="dialog"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-body">
-              <div class="text-center mt-2 mb-4">
-                <div class="auth-logo">
-                  <h4 class="mt-2 text-primary">Update User</h4>
-                </div>
-              </div>
-              <form class="px-3 row" action="#">
-                <div class="mb-3 col-lg-6">
-                  <label for="name" class="form-label">
-                    Name
-                  </label>
-                  <input
-                    class="form-control"
-                    type="email"
-                    id="name"
-                    required=""
-                    placeholder="Enter Name.."
-                    value="Alex Newton"
-                  />
-                </div>
-                <div class="mb-3 col-lg-6">
-                  <label for="email" class="form-label">
-                    Email Address
-                  </label>
-                  <input
-                    class="form-control"
-                    type="email"
-                    id="email"
-                    required=""
-                    placeholder="Enter Email Address.."
-                    value="alexnewton@gmail.com"
-                  />
-                </div>
-                <div class="mb-3 col-lg-6">
-                  <label for="mobile_number" class="form-label">
-                    Mobile Number
-                  </label>
-                  <input
-                    class="form-control"
-                    type="mobile_number"
-                    required=""
-                    id="mobile_number"
-                    placeholder="Enter Mobile Number.."
-                    value="1234567890"
-                  />
-                </div>
-                <div class="mb-3 col-lg-6">
-                  <label for="password" class="form-label">
-                    Password
-                  </label>
-                  <input
-                    class="form-control"
-                    type="password"
-                    required=""
-                    id="password"
-                    placeholder="Enter your Password"
-                    value="Alex Newton"
-                  />
-                </div>
-                <div class="mb-1 col-lg-12">
-                  <label>Select Permissions</label>
-                </div>
-                <div class="mb-1 col-lg-4">
-                  <input type="checkbox" class="form-check-input" checked />{" "}
-                  &nbsp;&nbsp;Inventory
-                </div>
-                <div class="mb-1 col-lg-4">
-                  <input type="checkbox" class="form-check-input" checked />{" "}
-                  &nbsp;&nbsp;Loss Profit
-                </div>
-                <div class="mb-1 col-lg-4">
-                  <input type="checkbox" class="form-check-input" checked />{" "}
-                  &nbsp;&nbsp;Add-Ons
-                </div>
-                <div class="mb-1 col-lg-4">
-                  <input type="checkbox" class="form-check-input" checked />{" "}
-                  &nbsp;&nbsp;Messages
-                </div>
-                <div class="mb-1 col-lg-4">
-                  <input type="checkbox" class="form-check-input" />{" "}
-                  &nbsp;&nbsp;Order
-                </div>
-                <div class="mb-1 col-lg-4">
-                  <input type="checkbox" class="form-check-input" />{" "}
-                  &nbsp;&nbsp;User
-                </div>
-                <div class="mb-1 col-lg-4">
-                  <input type="checkbox" class="form-check-input" />{" "}
-                  &nbsp;&nbsp;Settings
-                </div>
-                <div class="mt-2 mb-2 col-lg-12 text-center">
-                  <button class="btn btn-primary" type="submit">
-                    Save Changes
-                  </button>
-                  &nbsp;&nbsp;
-                  <button
-                    class="btn btn-outline-danger"
                     data-bs-dismiss="modal"
                   >
                     Cancel

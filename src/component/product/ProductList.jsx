@@ -10,6 +10,8 @@ const ProductList = () => {
   const navigate = useNavigate();
   const [productData, setproductData] = useState([]);
   const { setSpinner, spinner } = useContext(GlobalContext);
+  const [productId, setProductId] = useState([]);
+  const [deleteShow, setDShow] = useState(false);
   // ================== get list api
   const productListing = async () => {
     setSpinner(true);
@@ -42,7 +44,36 @@ const ProductList = () => {
   useEffect(() => {
     productListing();
   }, []);
-  console.log(productData, "productData");
+  // ============== delete product
+  const deleteProduct = async () => {
+    setSpinner(true);
+    let token = localStorage.getItem("Token");
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/api/status_product/deactivate/${productId}`,
+        {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          method: "GET",
+        }
+      );
+      if (response?.status === 200) {
+        const data = await response.json();
+        productListing();
+        toast.success("Product deleted");
+        setSpinner(false);
+      } else {
+        const data = await response.json();
+        toast.error(data?.message, {
+          autoClose: 5000,
+        });
+      }
+    } catch (error) {
+      setSpinner(false);
+    }
+  };
   return (
     <>
       {spinner && <Spinner />}
@@ -179,6 +210,10 @@ const ProductList = () => {
                                             className="btn btn-primary btn-sm mx-0"
                                             data-bs-toggle="modal"
                                             data-bs-target="#delete-alert-modal"
+                                            onClick={() => {
+                                              setDShow(true);
+                                              setProductId(item?._id);
+                                            }}
                                           >
                                             <span className="mdi mdi-trash-can-outline"></span>
                                           </button>
@@ -222,6 +257,10 @@ const ProductList = () => {
                   type="button"
                   className="btn btn-light my-2"
                   data-bs-dismiss="modal"
+                  onClick={() => {
+                    setDShow(false);
+                    deleteProduct();
+                  }}
                 >
                   Confirm
                 </button>
