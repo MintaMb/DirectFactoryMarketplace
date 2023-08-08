@@ -4,7 +4,6 @@ import Header from "./dashboard_layout/Header";
 const EditProduct = () => {
   return (
     <>
-      as
       <div id="wrapper">
         <Header />
         <div className="content-page">

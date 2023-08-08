@@ -59,9 +59,16 @@ const CreateProduct = () => {
       // for error msgs
       else {
         const data = await response.json();
-        toast.error(data?.message, {
-          autoClose: 5000,
-        });
+        if (data?.errors) {
+          let error = Object.keys(data?.errors)?.reverse();
+          for (let i = 0; i <= error?.length; i++) {
+            if (data?.errors[error[i]]?.length) {
+              toast.error(data?.errors[error[i]][0], {
+                autoClose: 5000,
+              });
+            }
+          }
+        }
       }
     } catch (errors) {
       console.error("An error occurred:", errors);
@@ -106,35 +113,36 @@ const CreateProduct = () => {
     offerListing();
   }, []);
   // ==================== variation form
-  // const handleChange = (idx) => (e) => {
-  //   const { name, value } = e.target;
-  //   const updatedRows = [...rows];
-  //   updatedRows[idx] = {
-  //     ...updatedRows[idx],
-  //     [name]: value,
-  //   };
-  //   setRows(updatedRows);
-  // };
+  const handleChange = (idx) => (e) => {
+    const { name, value } = e.target;
+    const updatedRows = [...rows];
+    updatedRows[idx] = {
+      ...updatedRows[idx],
+      [name]: value,
+    };
+    setRows(updatedRows);
+  };
 
-  // const handleAddRow = () => {
-  //   const newItem = {
-  //     name: "",
-  //     mobile: "",
-  //   };
-  //   setRows([...rows, newItem]);
-  // };
+  const handleAddRow = () => {
+    const newItem = {
+      name: "",
+      mobile: "",
+    };
+    setRows([...rows, newItem]);
+  };
 
-  // const handleRemoveRow = () => {
-  //   setRows(rows.slice(0, -1));
-  // };
+  const handleRemoveRow = () => {
+    setRows(rows.slice(0, -1));
+  };
 
-  // const handleRemoveSpecificRow = (idx) => () => {
-  //   const updatedRows = [...rows];
-  //   updatedRows.splice(idx, 1);
-  //   setRows(updatedRows);
-  // };
+  const handleRemoveSpecificRow = (idx) => () => {
+    const updatedRows = [...rows];
+    updatedRows.splice(idx, 1);
+    setRows(updatedRows);
+  };
   return (
     <>
+      skdkjlksj
       <div id="wrapper">
         <div className="content-page">
           <div className="content">
@@ -333,7 +341,7 @@ const CreateProduct = () => {
                           <div className="col-lg-3 mb-2 text-end">
                             <button
                               className="btn btn-primary btn-sm"
-                              // onClick={handleAddRow}
+                              onClick={handleAddRow}
                               type="button"
                             >
                               <span className="mdi mdi-plus-circle-outline"></span>
