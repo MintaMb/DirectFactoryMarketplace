@@ -85,6 +85,7 @@ const CreateProduct = () => {
       console.error("An error occurred:", errors);
     }
   };
+  console.log(watch().images,"watch");
   // ================== get product list api
   const getProductListing = async () => {
     try {
@@ -532,7 +533,7 @@ const CreateProduct = () => {
                               Submit
                             </button>
                           </div>
-                        </div>
+                          </div>
                       </div>
                     </div>
                   </div>
