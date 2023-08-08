@@ -13,6 +13,7 @@ const User = () => {
   const [postModal, setPostModal] = useState(false);
   const { setSpinner, spinner } = useContext(GlobalContext);
   const [deleteShow, setDShow] = useState(false);
+  const [userShow, setUserShow] = useState(false);
   const permissions = [
     { name: "Inventory", value: "inventory" },
     { name: "Order", value: "order" },
@@ -59,57 +60,58 @@ const User = () => {
       setSpinner(false);
     }
   };
-  console.log(userData, "userData");
-  // ==================== add new user
+  // Function to add a new user
   const userForm = async (data) => {
     try {
-      const formattedPermissions = JSON.stringify(data.permissions); // Convert the permissions array to a JSON string
-      const formattedPermissionsString = formattedPermissions.replace(
+      // Convert the permissions array to a JSON string and replace double quotes with single quotes
+      const formattedPermissions = JSON.stringify(data.permissions).replace(
         /"/g,
         "'"
-      ); // Replace double quotes with single quotes
+      );
 
+      // Prepare the data to be sent in the request body
       const formattedData = {
         first_name: data.first_name,
         email: data.email,
         phone: data.phone,
         password: data.password,
-        permissions: formattedPermissionsString,
+        permissions: formattedPermissions,
       };
-      // const formData = new FormData();
-      // formData.append("data", JSON.stringify(formattedData));
-      console.log(data, "data");
-      const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/api/add_client_user`,
+
+      // Make the API request to add a new user
+      const apiUrl = id
+        ? `${process.env.REACT_APP_BASE_URL}/api/update_client_user`
+        : `${process.env.REACT_APP_BASE_URL}/api/add_client_user`;
+      const response = await fetch(apiUrl,
         {
           headers: {
-            Accept: "application/json",
+            "Content-Type": "application/json", // Set Content-Type header
             Authorization: `Bearer ${localStorage.getItem("Token")}`,
           },
           method: "POST",
-          body: JSON.stringify(formattedData),
+          body: JSON.stringify(formattedData), // Send formatted data as JSON
         }
       );
+
       if (response?.status === 200) {
-        reset();
+        reset(); // Define the reset() function
+        setUserShow(false);
         toast.success(
           `${id ? "User Updated successfully" : "User added successfully"}`
         );
-      }
-      if (response?.status === 401) {
+      } else if (response?.status === 401) {
         localStorage.clear();
-        toast.success(`Session expired !`);
-        navigate("/");
-      }
-      // for error msgs
-      else {
-        const data = await response.json();
-        toast.error(data?.message, {
+        toast.error(`Session expired !`);
+        navigate("/"); // Redirect to the login page
+      } else {
+        const responseData = await response.json();
+        toast.error(responseData?.message || "An error occurred", {
           autoClose: 5000,
         });
       }
-    } catch (errors) {
-      console.error("An error occurred:", errors);
+    } catch (error) {
+      console.error("An error occurred:", error);
+      // Handle any additional error handling here
     }
   };
   // ====== edit user
@@ -219,6 +221,10 @@ const User = () => {
                                   className="btn btn-primary waves-effect waves-light"
                                   data-bs-toggle="modal"
                                   data-bs-target="#create-user-model"
+                                  onClick={() => {
+                                    setUserShow(true);
+                                    // setProduct(item);
+                                  }}
                                 >
                                   <span className="btn-label">
                                     <i className="mdi mdi-account-plus"></i>
@@ -520,13 +526,20 @@ const User = () => {
                   &nbsp;&nbsp;Settings
                 </div> */}
                 <div className="mt-2 col-lg-12 text-center">
-                  <button className="btn btn-primary" type="submit">
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => {
+                      setUserShow(false);
+                    }}
+                  >
                     Submit
                   </button>
                   &nbsp;&nbsp;
                   <button
                     className="btn btn-outline-danger"
                     data-bs-dismiss="modal"
+                    type="button"
+                    onClick={() => reset()}
                   >
                     Cancel
                   </button>

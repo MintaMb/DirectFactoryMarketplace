@@ -148,7 +148,7 @@ const inventoryForm = async (data, id) => {
   return (
     <>
       {spinner && <Spinner />}
-      <div id="wrapper">
+      <div id="wrapper" onClick={()=>reset()}>
         <div className="content-page">
           <div className="content">
             <div className="container-fluid">
