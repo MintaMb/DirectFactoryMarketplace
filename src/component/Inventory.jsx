@@ -5,13 +5,14 @@ import { GlobalContext } from "../App";
 import { toast } from "react-toastify";
 import placeholder from "../assets/images/placeholder.png"; //placeholderimg
 import NoData from "./common-component/NoData";
-import { useForm } from "react-hook-form";
+import { useForm, useFormState } from "react-hook-form";
 import moment from "moment";
 const Inventory = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [inventoryData, setInventoryData] = useState([]);
   const { setSpinner, spinner } = useContext(GlobalContext);
+  const [prduct, setProduct] = useState();
   const {
     register,
     watch,
@@ -97,8 +98,8 @@ const Inventory = () => {
         total_price: data.total_price,
       };
 
-      const formData = new FormData();
-      formData.append("data", JSON.stringify(formattedData));
+      // const formData = new FormData();
+      // formData.append("data", JSON.stringify(formattedData));
       const response = await fetch(
         `${process.env.REACT_APP_BASE_URL}/api/add_stock_history
         ${id ? "/" + id : ""}`,
@@ -108,12 +109,13 @@ const Inventory = () => {
             Authorization: `Bearer ${localStorage.getItem("Token")}`,
           },
           method: "POST",
-          body: formData,
+          body: JSON.stringify(formattedData),
         }
       );
       if (response?.status === 200) {
         reset();
-        setTimeout(() => {}, 500);
+        setTimeout(() => { }, 500);
+        setProduct();
         navigate("/inventory");
         toast.success(
           `${
@@ -137,7 +139,17 @@ const Inventory = () => {
       console.error("An error occurred:", errors);
     }
   };
+  useEffect(() => {
+    console.log("Setting form values with:", prduct);
+    if (prduct) {
+      setValue("product_id", prduct._id);
+      setValue("total_price", prduct.total_price);
+      setValue("quantity", prduct.quantity);
+      setValue("reception_date", prduct.reception_date);
+    }
+  }, [prduct]);
 
+  console.log(watch(),"jaja");
   // ============== delete product
   return (
     <>
@@ -359,7 +371,10 @@ const Inventory = () => {
                                               <button
                                                 className="btn btn-primary btn-sm"
                                                 data-bs-toggle="modal"
-                                                data-bs-target="#order-model"
+                                                data-bs-target="#order-model"  onClick={() => {
+                                                  console.log("Selected Product:", item);
+                                                  setProduct(item);
+                                                }}
                                               >
                                                 Order More
                                               </button>
@@ -545,7 +560,7 @@ const Inventory = () => {
                       Product
                     </label>
                     <select
-                      className={` form-select                         }`}
+                      className={` form-select }`}
                       {...register("product_id")}
                       value={watch()?.product_id}
                     >
@@ -554,7 +569,7 @@ const Inventory = () => {
                       </option>
                       {productData?.map((item, index) => {
                         return (
-                          <option value={item?.id} key={index + 1}>
+                          <option value={item?._id} key={index + 1}>
                             {item?.name}
                           </option>
                         );
@@ -580,6 +595,7 @@ const Inventory = () => {
                     <input
                       type="number"
                       {...register("total_price")}
+                      // value={prduct?.total_price || ""}
                       className="form-control"
                       placeholder="Enter Total Order Price..."
                     />
@@ -611,6 +627,7 @@ const Inventory = () => {
                     <button
                       className="btn btn-outline-primary"
                       data-bs-dismiss="modal"
+                      onClick={()=>reset()}
                     >
                       Cancel
                     </button>
