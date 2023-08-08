@@ -4,6 +4,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Spinner from "../common-component/Spinner";
 import { GlobalContext } from "../../App";
 import { toast } from "react-toastify";
+  import placeholder from "../../assets/images/placeholder.png"; //placeholderimg
+import NoData from "../common-component/NoData";
 const ProductDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -67,7 +69,7 @@ const ProductDetails = () => {
                       <div className="row">
                         <div className="col-lg-2">
                           <img
-                            src="/assets/images/products/product-1.png"
+                            src={placeholder}
                             className="img img-thumbnail"
                           />
                         </div>
@@ -119,7 +121,7 @@ const ProductDetails = () => {
                           <span>
                             {productDetailData?.variations?.[0]?.name
                               ? productDetailData?.variations?.[0]?.name
-                              : "-"}
+                              : "No variants "}
                           </span>
                         </p>
                         <div className="col-lg-12 mt-2">
@@ -134,11 +136,8 @@ const ProductDetails = () => {
                                   <th>Stock</th>
                                 </tr>
                               </thead>
+                            {productDetailData.length>0?
                               <tbody>
-                                {console.log(
-                                  productDetailData?.variations,
-                                  "item"
-                                )}
                                 {productDetailData?.variations?.map(
                                   (item, index) => {
                                     return (
@@ -152,7 +151,7 @@ const ProductDetails = () => {
                                     );
                                   }
                                 )}
-                              </tbody>
+                              </tbody>:<NoData title="No Varient "/>}
                             </table>
                           </div>
                         </div>

@@ -26,8 +26,8 @@ const InventoryListing = () => {
   } = useForm({ mode: "all" });
   // ================== get list api
   const inventoryListing = async () => {
-    setSpinner(true);
     let token = localStorage.getItem("Token");
+    setSpinner(true);
     try {
       const response = await fetch(
         `${process.env.REACT_APP_BASE_URL}/api/view_all_inventories`,
@@ -52,6 +52,7 @@ const InventoryListing = () => {
     } catch (error) {
       setSpinner(false);
     }
+      setSpinner(false);
   };
   useEffect(() => {
     inventoryListing();
@@ -90,7 +91,8 @@ const InventoryListing = () => {
     productListing();
   }, []);
   // ========== add inventory api
-const inventoryForm = async (data, id) => {
+  const inventoryForm = async (data, id) => {
+  setSpinner(true)
   try {
     const formattedData = {
       product_id: data.product_id,
@@ -135,6 +137,7 @@ const inventoryForm = async (data, id) => {
     console.error("An error occurred:", error);
     // Handle any additional error handling here
   }
+  setSpinner(false);
 };
   useEffect(() => {
     if (prduct) {
@@ -148,7 +151,7 @@ const inventoryForm = async (data, id) => {
   return (
     <>
       {spinner && <Spinner />}
-      <div id="wrapper" onClick={()=>reset()}>
+      <div id="wrapper" onClick={() => reset()}>
         <div className="content-page">
           <div className="content">
             <div className="container-fluid">
@@ -207,9 +210,7 @@ const inventoryForm = async (data, id) => {
                                               ? item?.capacity
                                               : "-"}
                                           </td>
-                                          <td>
-                                            {item?.stock}
-                                          </td>
+                                          <td>{item?.stock}</td>
                                           <td width="180px">
                                             <button
                                               className="btn btn-primary btn-sm"
@@ -369,7 +370,7 @@ const inventoryForm = async (data, id) => {
                       type="button"
                       className="btn btn-outline-primary"
                       data-bs-dismiss="modal"
-                      onClick={() => reset()}
+                      // onClick={id ? "" : () => reset()}
                     >
                       Cancel
                     </button>

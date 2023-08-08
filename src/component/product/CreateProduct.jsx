@@ -343,24 +343,6 @@ const CreateProduct = () => {
                               Upload Product Images{" "}
                               <span className="text-danger">*</span>
                             </label>
-                            {/* <Controller
-                              name="images"
-                              control={control}
-                              defaultValue={[]}
-                              rules={{ required: "Product Images is required" }}
-                              render={({ field }) => (
-                                <div>
-                                  <input
-                                    type="file"
-                                    multiple
-                                    className="form-control product_image"
-                                    onChange={(e) =>
-                                      field.onChange(e.target.files)
-                                    }
-                                  />
-                                </div>
-                              )}
-                            /> */}
                             <input
                               id="eventImages"
                               onChange={(e) => handleImage(e)}

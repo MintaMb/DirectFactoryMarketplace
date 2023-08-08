@@ -20,7 +20,7 @@ const Inventory = () => {
   });
   // ================== get list api
   const inventoryListing = async () => {
-    setSpinner(false);
+    setSpinner(true);
     let token = localStorage.getItem("Token");
     try {
       const response = await fetch(
@@ -53,7 +53,7 @@ const Inventory = () => {
   // ================== get product list api
   const [productData, setproductData] = useState([]);
   const productListing = async () => {
-    setSpinner(false);
+    setSpinner(true);
     let token = localStorage.getItem("Token");
     try {
       const response = await fetch(
@@ -86,6 +86,7 @@ const Inventory = () => {
   }, []);
   // ========== add inventory api
   const inventoryForm = async (data, id) => {
+      setSpinner(true);
     try {
       const formattedData = {
         product_id: data.product_id,
@@ -130,6 +131,7 @@ const Inventory = () => {
       console.error("An error occurred:", error);
       // Handle any additional error handling here
     }
+      setSpinner(false);
   };
   useEffect(() => {
     if (prduct) {
@@ -562,7 +564,6 @@ const Inventory = () => {
           </div>
         </div>
       </div>
-
       {/* ==== inventory modal */}
       <div
         id="order-model"
@@ -612,7 +613,6 @@ const Inventory = () => {
                     <input
                       type="number"
                       {...register("total_price")}
-                      // value={prduct?.total_price || ""}
                       className="form-control"
                       placeholder="Enter Total Order Price..."
                     />
@@ -652,7 +652,6 @@ const Inventory = () => {
                       type="button"
                       className="btn btn-outline-primary"
                       data-bs-dismiss="modal"
-                      onClick={() => reset()}
                     >
                       Cancel
                     </button>
