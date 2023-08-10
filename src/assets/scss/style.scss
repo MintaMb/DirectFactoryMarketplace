@@ -37,3 +37,21 @@
     width: 200px;
   }
 }
+
+// === modal
+.show-modal {
+  align-items: center;
+  display: flex;
+  min-height: calc(100% - var(--bs-modal-margin)*2);
+  --bs-backdrop-zindex: 1050;
+  --bs-backdrop-bg: #0003;
+  --bs-backdrop-opacity: .5;
+  background-color: var(--bs-backdrop-bg);
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: var(--bs-backdrop-zindex);
+
+}

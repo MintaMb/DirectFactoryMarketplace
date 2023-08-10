@@ -20,9 +20,11 @@ const CreateProduct = () => {
   const [editProduct, seteditProduct] = useState();
   const [eventImage, setEventImage] = useState([]);
   const { setSpinner, spinner } = useContext(GlobalContext);
-  //===================  create product post api
+  //===================  create product post api.
   const productForm = async (data) => {
-    setSpinner(true)
+    let userData = JSON.parse(localStorage.getItem("userData"));
+    // return
+    setSpinner(true);
     try {
       let formData = new FormData();
       formData.append("product_id", id);
@@ -33,7 +35,7 @@ const CreateProduct = () => {
       formData.append("cost", watch()?.cost);
       formData.append("sale_price", watch()?.sale_price);
       formData.append("capacity", watch()?.capacity);
-      console.log(watch()?.id, " watch()?.id");
+      formData.append("factory_id", userData?.factory_id);
       // Append images to formData
       // =====Event images
       if (eventImage?.length) {
@@ -50,7 +52,8 @@ const CreateProduct = () => {
       const apiUrl = id
         ? `${process.env.REACT_APP_BASE_URL}/api/update_product`
         : `${process.env.REACT_APP_BASE_URL}/api/add_product`;
-            const response = await fetch(apiUrl,
+      const response = await fetch(
+        apiUrl,
         // `${process.env.REACT_APP_BASE_URL}${id ? `/api/update_product` : `api/add_product`}`,
         // `${process.env.REACT_APP_BASE_URL}/api/add_product`,
         {
@@ -78,10 +81,10 @@ const CreateProduct = () => {
         navigate("/");
       }
       if (response?.status >= 401) {
-         const data = await response.json();
-         toast.error(data?.message, {
-           autoClose: 5000,
-         });
+        const data = await response.json();
+        toast.error(data?.message, {
+          autoClose: 5000,
+        });
       }
       // for error msgs
     } catch (errors) {
@@ -89,7 +92,6 @@ const CreateProduct = () => {
     }
     setSpinner(true);
   };
-  console.log(watch().images,"watch");
   // ================== get product list api
   const getProductListing = async () => {
     try {
@@ -121,26 +123,10 @@ const CreateProduct = () => {
     }
   };
   useEffect(() => {
-    if(id){
-    getProductListing();}
+    if (id) {
+      getProductListing();
+    }
   }, []);
-  // useEffect(() => {
-  //   if (editProduct && id) {
-  //     setValue("name", editProduct.name);
-  //     setValue("description", editProduct.description);
-  //     setValue("sku", editProduct.sku);
-  //     setValue("unit", editProduct.unit);
-  //     setValue("images", editProduct.images);
-  //     setValue("cost", editProduct.cost);
-  //     setValue("sale_price", editProduct.sale_price);
-  //     setValue("capacity", editProduct.capacity);
-  //     setEventImage(editProduct.event_pictures);
-  //     if (editProduct.variations) {
-  //       setRows(editProduct.variations);
-  //     }
-  //     console.log(editProduct.variations, "haha");
-  //   }
-  // }, [editProduct, id]);
   // ==================== variation form
   const handleChange = (idx) => (e) => {
     const { name, value } = e.target;
@@ -217,40 +203,39 @@ const CreateProduct = () => {
       }
     }
   };
-  console.log(eventImage);
   return (
     <>
       skdkjlksj
-      <div id="wrapper">
-        <div className="content-page">
-          <div className="content">
-            <div className="container-fluid">
-              <form className="form" onSubmit={handleSubmit(productForm)}>
-                <div className="row">
-                  <div className="col-12">
-                    <div className="page-title-box">
-                      <h4 className="page-title">Create Products</h4>
+      <div id='wrapper'>
+        <div className='content-page'>
+          <div className='content'>
+            <div className='container-fluid'>
+              <form className='form' onSubmit={handleSubmit(productForm)}>
+                <div className='row'>
+                  <div className='col-12'>
+                    <div className='page-title-box'>
+                      <h4 className='page-title'>Create Products</h4>
                     </div>
                   </div>
                 </div>
-                <div className="row">
-                  <div className="col-lg-12">
-                    <div className="card">
-                      <div className="card-body">
-                        <div className="row">
-                          <div className="col-lg-12 mb-2">
+                <div className='row'>
+                  <div className='col-lg-12'>
+                    <div className='card'>
+                      <div className='card-body'>
+                        <div className='row'>
+                          <div className='col-lg-12 mb-2'>
                             <label>
                               Product Name{" "}
-                              <span className="text-danger">*</span>
+                              <span className='text-danger'>*</span>
                             </label>
                             <input
-                              type="text"
+                              type='text'
                               {...register("name", { required: true })}
-                              className="form-control product_name"
-                              placeholder="Enter Product Name..."
+                              className='form-control product_name'
+                              placeholder='Enter Product Name...'
                             />
                             {errors?.name?.type === "required" && (
-                              <p role="alert" className="alert-msg text-danger">
+                              <p role='alert' className='alert-msg text-danger'>
                                 Product Name is required
                               </p>
                             )}
@@ -280,72 +265,71 @@ const CreateProduct = () => {
                               </p>
                             )}
                           </div> */}
-                          <div className="col-lg-12 mb-2">
+                          <div className='col-lg-12 mb-2'>
                             <label>
                               Product Description{" "}
-                              <span className="text-danger">*</span>
+                              <span className='text-danger'>*</span>
                             </label>
                             <Controller
-                              name="description"
+                              name='description'
                               control={control}
                               rules={{ required: "Description is required" }}
                               render={({ field }) => (
                                 <textarea
-                                  className="form-control"
+                                  className='form-control'
                                   {...field}
-                                  placeholder="typehere"
+                                  placeholder='typehere'
                                   defaultValue={editProduct?.description} // Set the defaultValue for the textarea here
                                 ></textarea>
                               )}
                             />
                             {errors?.description && (
-                              <p role="alert" className="alert-msg text-danger">
+                              <p role='alert' className='alert-msg text-danger'>
                                 {errors?.description?.message}
                               </p>
                             )}
                           </div>
 
-                          <div className="col-lg-4 mb-2">
+                          <div className='col-lg-4 mb-2'>
                             <label>
-                              Product SKU <span className="text-danger">*</span>
+                              Product SKU <span className='text-danger'>*</span>
                             </label>
                             <input
                               {...register("sku", { required: true })}
-                              type="text"
-                              className="form-control product_sku"
-                              placeholder="Enter Product SKU..."
+                              type='text'
+                              className='form-control product_sku'
+                              placeholder='Enter Product SKU...'
                             />
                             {errors?.sku?.type === "required" && (
-                              <p role="alert" className="alert-msg text-danger">
+                              <p role='alert' className='alert-msg text-danger'>
                                 Product SKU id required
                               </p>
                             )}
                           </div>
-                          <div className="col-lg-4 mb-2">
+                          <div className='col-lg-4 mb-2'>
                             <label>
                               Product Unit{" "}
-                              <span className="text-danger">*</span>
+                              <span className='text-danger'>*</span>
                             </label>
                             <select
-                              className="form-select"
-                              {...register("unit", { required: true })}
-                            >
-                              <option value="">Select unit</option>
-                              <option value="KG">KG</option>
-                              <option value="GM">GM</option>
-                              <option value="Lit">Lit</option>
-                              <option value="Piece">Piece</option>
+                              className='form-select'
+                              {...register("unit", { required: true })}>
+                              <option value=''>Select unit</option>
+                              <option value='KG'>KG</option>
+                              <option value='GM'>GM</option>
+                              <option value='Lit'>Lit</option>
+                              <option value='Piece'>Piece</option>
                             </select>
                             {errors?.unit?.type === "required" && (
-                              <p role="alert" className="alert-msg text-danger">
+                              <p role='alert' className='alert-msg text-danger'>
                                 Product Unit is required
                               </p>
                             )}
                           </div>
-                          <div className="col-lg-4 mb-2">
+                          <div className='col-lg-4 mb-2'>
                             <label>
                               Upload Product Images{" "}
-                              <span className="text-danger">*</span>
+                              <span className='text-danger'>*</span>
                             </label>
                             {/* <Controller
                               name="images"
@@ -366,104 +350,103 @@ const CreateProduct = () => {
                               )}
                             /> */}
                             <input
-                              id="eventImages"
+                              id='eventImages'
                               onChange={(e) => handleImage(e)}
-                              type="file"
-                              name="files[]"
-                              data-multiple-caption="{count} files selected"
+                              type='file'
+                              name='files[]'
+                              data-multiple-caption='{count} files selected'
                               multiple
-                              accept=".jpg,.png,.jpeg "
-                              className="form-control product_image"
+                              accept='.jpg,.png,.jpeg '
+                              className='form-control product_image'
                             />
                             {errors?.images && (
-                              <p role="alert" className="alert-msg text-danger">
+                              <p role='alert' className='alert-msg text-danger'>
                                 {errors?.images?.message}{" "}
                                 {/ Corrected field name here /}
                               </p>
                             )}
                           </div>
-                          <div className="col-lg-4 mb-2">
+                          <div className='col-lg-4 mb-2'>
                             <label>
-                              Cost Price <span className="text-danger">*</span>
+                              Cost Price <span className='text-danger'>*</span>
                             </label>
                             <input
-                              type="text"
+                              type='text'
                               onKeyPress={(offer) => {
                                 if (!/[0-9]/.test(offer.key)) {
                                   offer.preventDefault();
                                 }
                               }}
                               {...register("cost", { required: true })}
-                              className="form-control cost_price"
-                              placeholder="Enter Product Cost Price..."
+                              className='form-control cost_price'
+                              placeholder='Enter Product Cost Price...'
                             />
                             {errors?.cost?.type === "required" && (
-                              <p role="alert" className="alert-msg text-danger">
+                              <p role='alert' className='alert-msg text-danger'>
                                 Cost Price is required
                               </p>
                             )}
                           </div>
-                          <div className="col-lg-4 mb-2">
+                          <div className='col-lg-4 mb-2'>
                             <label>
-                              Sale Price <span className="text-danger">*</span>
+                              Sale Price <span className='text-danger'>*</span>
                             </label>
                             <input
-                              type="text"
+                              type='text'
                               onKeyPress={(offer) => {
                                 if (!/[0-9]/.test(offer.key)) {
                                   offer.preventDefault();
                                 }
                               }}
                               {...register("sale_price", { required: true })}
-                              className="form-control sale_price"
-                              placeholder="Enter Product Sale Price..."
+                              className='form-control sale_price'
+                              placeholder='Enter Product Sale Price...'
                             />
                             {errors?.sale_price?.type === "required" && (
-                              <p role="alert" className="alert-msg text-danger">
+                              <p role='alert' className='alert-msg text-danger'>
                                 Sale Price is required
                               </p>
                             )}
                           </div>
-                          <div className="col-lg-4 mb-2">
+                          <div className='col-lg-4 mb-2'>
                             <label>
-                              Capacity <span className="text-danger">*</span>
+                              Capacity <span className='text-danger'>*</span>
                             </label>
                             <input
-                              type="text"
+                              type='text'
                               onKeyPress={(offer) => {
                                 if (!/[0-9]/.test(offer.key)) {
                                   offer.preventDefault();
                                 }
                               }}
                               {...register("capacity", { required: true })}
-                              className="form-control capacity"
-                              placeholder="Enter Capacity..."
+                              className='form-control capacity'
+                              placeholder='Enter Capacity...'
                             />
                             {errors?.capacity?.type === "required" && (
-                              <p role="alert" className="alert-msg text-danger">
+                              <p role='alert' className='alert-msg text-danger'>
                                 Capacity is required
                               </p>
                             )}
                           </div>
                         </div>
                         <hr />
-                        <div className="row">
-                          <div className="col-lg-9 mb-2">
-                            <h5 className="mb-0">Variations</h5>
+                        <div className='row'>
+                          <div className='col-lg-9 mb-2'>
+                            <h5 className='mb-0'>Variations</h5>
                           </div>
-                          <div className="col-lg-3 mb-2 text-end">
+                          <div className='col-lg-3 mb-2 text-end'>
                             <button
-                              className="btn btn-primary btn-sm"
+                              className='btn btn-primary btn-sm'
                               onClick={handleAddRow}
-                              type="button"
-                            >
-                              <span className="mdi mdi-plus-circle-outline"></span>
+                              type='button'>
+                              <span className='mdi mdi-plus-circle-outline'></span>
                               Add New
                             </button>
                           </div>
-                          <div className="col-lg-12">
-                            <table className="table table-bordered">
-                              <thead className="bg-light">
+                          <div className='col-lg-12'>
+                            <table className='table table-bordered'>
+                              <thead className='bg-light'>
                                 <tr>
                                   <th>Variant</th>
                                   <th>Variant Cost Price</th>
@@ -474,55 +457,54 @@ const CreateProduct = () => {
                               </thead>
                               <tbody>
                                 {rows.map((item, idx) => (
-                                  <tr id="addr0" key={idx}>
+                                  <tr id='addr0' key={idx}>
                                     <td>
                                       <input
-                                        name="name"
+                                        name='name'
                                         onChange={handleChange(idx)}
                                         value={item.name}
-                                        type="text"
-                                        className="form-control product_variant"
-                                        placeholder="Enter Product Variant..."
+                                        type='text'
+                                        className='form-control product_variant'
+                                        placeholder='Enter Product Variant...'
                                       />
                                     </td>
                                     <td>
                                       <input
-                                        type="text"
-                                        name="cost_price"
+                                        type='text'
+                                        name='cost_price'
                                         onChange={handleChange(idx)}
                                         value={item.cost_price}
-                                        className="form-control variant_cost_price"
-                                        placeholder="Enter Variant Cost Price..."
+                                        className='form-control variant_cost_price'
+                                        placeholder='Enter Variant Cost Price...'
                                       />
                                     </td>
                                     <td>
                                       <input
-                                        name="sale_price"
-                                        type="text"
+                                        name='sale_price'
+                                        type='text'
                                         onChange={handleChange(idx)}
                                         value={item.sale_price}
-                                        className="form-control variant_sale_price"
-                                        placeholder="Enter Variant Sale Price..."
+                                        className='form-control variant_sale_price'
+                                        placeholder='Enter Variant Sale Price...'
                                       />
                                     </td>
                                     <td>
                                       <input
-                                        type="text"
-                                        name="stock"
+                                        type='text'
+                                        name='stock'
                                         onChange={handleChange(idx)}
                                         value={item.stock}
-                                        className="form-control product_brand"
-                                        placeholder="Enter Variant SKU..."
+                                        className='form-control product_brand'
+                                        placeholder='Enter Variant SKU...'
                                       />
                                     </td>
-                                    <td className="text-center">
+                                    <td className='text-center'>
                                       <button
                                         onClick={handleRemoveRow}
-                                        type="button"
-                                        className="float-right text-danger bg-transparent border-0"
-                                      >
+                                        type='button'
+                                        className='float-right text-danger bg-transparent border-0'>
                                         {" "}
-                                        <span className="mdi mdi-trash-can-outline mdi-24px pe-auto delete_button"></span>
+                                        <span className='mdi mdi-trash-can-outline mdi-24px pe-auto delete_button'></span>
                                       </button>
                                     </td>
                                   </tr>
@@ -531,13 +513,13 @@ const CreateProduct = () => {
                             </table>
                           </div>
                         </div>
-                        <div className="row">
-                          <div className="col-lg-3 mx-auto">
-                            <button className="btn btn-primary w-100">
+                        <div className='row'>
+                          <div className='col-lg-3 mx-auto'>
+                            <button className='btn btn-primary w-100'>
                               Submit
                             </button>
                           </div>
-                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

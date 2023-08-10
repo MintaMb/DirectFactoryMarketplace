@@ -77,41 +77,40 @@ const ProductList = () => {
   return (
     <>
       {spinner && <Spinner />}
-      <div id="wrapper">
-        <div className="content-page">
-          <div className="content">
-            <div className="container-fluid">
-              <div className="row">
-                <div className="col-12">
-                  <div className="page-title-box">
-                    <h4 className="page-title">Products List</h4>
+      <div id='wrapper'>
+        <div className='content-page'>
+          <div className='content'>
+            <div className='container-fluid'>
+              <div className='row'>
+                <div className='col-12'>
+                  <div className='page-title-box'>
+                    <h4 className='page-title'>Products List</h4>
                   </div>
                 </div>
               </div>
-              <div className="row">
-                <div className="col-lg-12">
-                  <div className="card">
-                    <div className="card-body">
-                      <div class="row">
-                        <div className="col-lg-8 mb-2">
+              <div className='row'>
+                <div className='col-lg-12'>
+                  <div className='card'>
+                    <div className='card-body'>
+                      <div class='row'>
+                        <div className='col-lg-8 mb-2'>
                           <h5>Products</h5>
                         </div>
-                        <div className="col-lg-4 text-end mb-2">
+                        <div className='col-lg-4 text-end mb-2'>
                           <Link
-                            to="/inventory/create-product"
-                            className="btn btn-primary"
-                          >
+                            to='/inventory/create-product'
+                            className='btn btn-primary'>
                             Add New Product
                           </Link>
-                          <button className="btn btn-primary mx-2">
+                          <button className='btn btn-primary mx-2'>
                             Print Report
                           </button>
                         </div>
-                        <div className="col-lg-12">
-                          <div className="table-responsive">
+                        <div className='col-lg-12'>
+                          <div className='table-responsive'>
                             {productData?.length > 0 ? (
-                              <table className="table dt-responsive nowrap w-100 dataTable dtr-inline border">
-                                <thead className="bg-light">
+                              <table className='table dt-responsive nowrap w-100 dataTable dtr-inline border'>
+                                <thead className='bg-light'>
                                   <tr>
                                     <th>SL</th>
                                     <th>Product Name</th>
@@ -131,16 +130,16 @@ const ProductList = () => {
                                           {item?.image ? (
                                             <img
                                               src={item?.image}
-                                              alt="contact-img"
-                                              title="contact-img"
-                                              className="avatar-sm img-thumbnail"
+                                              alt='contact-img'
+                                              title='contact-img'
+                                              className='avatar-sm img-thumbnail'
                                             />
                                           ) : (
                                             <img
                                               src={placeholder}
-                                              alt="contact-img"
-                                              title="contact-img"
-                                              className="avatar-sm img-thumbnail"
+                                              alt='contact-img'
+                                              title='contact-img'
+                                              className='avatar-sm img-thumbnail'
                                             />
                                           )}
                                           &nbsp;&nbsp;
@@ -154,28 +153,28 @@ const ProductList = () => {
                                         </td>
                                         <td>
                                           {item?.is_approved === true ? (
-                                            <label className="badge badge-soft-success">
+                                            <label className='badge badge-soft-success'>
                                               Approved
                                             </label>
                                           ) : (
-                                            <label className="badge badge-soft-danger">
+                                            <label className='badge badge-soft-danger'>
                                               Not Approved
                                             </label>
                                           )}
                                         </td>
                                         <td>
                                           {item?.status === true ? (
-                                            <button className="btn btn-success btn-sm">
+                                            <button className='btn btn-success btn-sm'>
                                               Active
                                             </button>
                                           ) : (
-                                            <button className="btn btn-danger btn-sm">
+                                            <button className='btn btn-danger btn-sm'>
                                               Not Active
                                             </button>
                                           )}
                                         </td>
 
-                                        <td width="180px">
+                                        <td width='180px'>
                                           <button
                                             onClick={() =>
                                               navigate(
@@ -185,13 +184,8 @@ const ProductList = () => {
                                                 }
                                               )
                                             }
-                                            className="btn btn-primary btn-sm mx-1"
-                                          >
-                                            {console.log(
-                                              item?._id,
-                                              "item?._id"
-                                            )}
-                                            <span className="mdi mdi-eye"></span>
+                                            className='btn btn-primary btn-sm mx-1'>
+                                            <span className='mdi mdi-eye'></span>
                                           </button>
                                           <button
                                             onClick={() =>
@@ -202,20 +196,18 @@ const ProductList = () => {
                                                 }
                                               )
                                             }
-                                            className="btn btn-primary btn-sm mx-1"
-                                          >
-                                            <span className="mdi mdi-square-edit-outline"></span>
+                                            className='btn btn-primary btn-sm mx-1'>
+                                            <span className='mdi mdi-square-edit-outline'></span>
                                           </button>
                                           <button
-                                            className="btn btn-primary btn-sm mx-0"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#delete-alert-modal"
+                                            className='btn btn-primary btn-sm mx-0'
+                                            data-bs-toggle='modal'
+                                            data-bs-target='#delete-alert-modal'
                                             onClick={() => {
                                               setDShow(true);
                                               setProductId(item?._id);
-                                            }}
-                                          >
-                                            <span className="mdi mdi-trash-can-outline"></span>
+                                            }}>
+                                            <span className='mdi mdi-trash-can-outline'></span>
                                           </button>
                                         </td>
                                       </tr>
@@ -224,7 +216,7 @@ const ProductList = () => {
                                 </tbody>
                               </table>
                             ) : (
-                              <NoData title="No product data.." />
+                              <NoData title='No product data..' />
                             )}
                           </div>
                         </div>
@@ -238,38 +230,35 @@ const ProductList = () => {
         </div>
       </div>
       <div
-        id="delete-alert-modal"
-        className="modal fade"
-        tabindex="-1"
-        role="dialog"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-sm">
-          <div className="modal-content modal-filled bg-danger">
-            <div className="modal-body p-4">
-              <div className="text-center">
-                <i className="mdi mdi-trash-can-outline h1 text-white"></i>
-                <h4 className="mt-2 text-white">Delete!</h4>
-                <p className="mt-3 text-white">
+        id='delete-alert-modal'
+        className='modal fade'
+        tabindex='-1'
+        role='dialog'
+        aria-hidden='true'>
+        <div className='modal-dialog modal-sm'>
+          <div className='modal-content modal-filled bg-danger'>
+            <div className='modal-body p-4'>
+              <div className='text-center'>
+                <i className='mdi mdi-trash-can-outline h1 text-white'></i>
+                <h4 className='mt-2 text-white'>Delete!</h4>
+                <p className='mt-3 text-white'>
                   Are you sure you want to delete this Product?
                 </p>
                 <button
-                  type="button"
-                  className="btn btn-light my-2"
-                  data-bs-dismiss="modal"
+                  type='button'
+                  className='btn btn-light my-2'
+                  data-bs-dismiss='modal'
                   onClick={() => {
                     setDShow(false);
                     deleteProduct();
-                  }}
-                >
+                  }}>
                   Confirm
                 </button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <button
-                  type="button"
-                  className="btn btn-danger border-white my-2"
-                  data-bs-dismiss="modal"
-                >
+                  type='button'
+                  className='btn btn-danger border-white my-2'
+                  data-bs-dismiss='modal'>
                   Cancel
                 </button>
               </div>
@@ -278,66 +267,64 @@ const ProductList = () => {
         </div>
       </div>
       <div
-        id="order-model"
-        className="modal fade"
-        tabindex="-1"
-        role="dialog"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-body">
-              <div className="text-center mt-0 mb-2">
-                <div className="auth-logo">
-                  <h4 className="mt-4 text-primary text-start mb-0">
+        id='order-model'
+        className='modal fade'
+        tabindex='-1'
+        role='dialog'
+        aria-hidden='true'>
+        <div className='modal-dialog'>
+          <div className='modal-content'>
+            <div className='modal-body'>
+              <div className='text-center mt-0 mb-2'>
+                <div className='auth-logo'>
+                  <h4 className='mt-4 text-primary text-start mb-0'>
                     Add New Stock
                   </h4>
                   <hr />
                 </div>
               </div>
-              <form className="px-3 " action="#">
-                <div className="row">
-                  <div className="col-lg-12 mb-2">
-                    <label for="product_name" className="form-label">
+              <form className='px-3 ' action='#'>
+                <div className='row'>
+                  <div className='col-lg-12 mb-2'>
+                    <label for='product_name' className='form-label'>
                       Product
                     </label>
-                    <select className="form-select">
-                      <option value="">Running Shoes</option>
+                    <select className='form-select'>
+                      <option value=''>Running Shoes</option>
                     </select>
                   </div>
-                  <div className="col-lg-6 mb-2">
-                    <label for="order_price" className="form-label">
+                  <div className='col-lg-6 mb-2'>
+                    <label for='order_price' className='form-label'>
                       Total Order Price
                     </label>
                     <input
-                      type="number"
-                      className="form-control"
-                      placeholder="Enter Total Order Price..."
+                      type='number'
+                      className='form-control'
+                      placeholder='Enter Total Order Price...'
                     />
                   </div>
-                  <div className="col-lg-6 mb-2">
-                    <label for="order_qty" className="form-label">
+                  <div className='col-lg-6 mb-2'>
+                    <label for='order_qty' className='form-label'>
                       Order Qty.
                     </label>
                     <input
-                      type="number"
-                      className="form-control"
-                      placeholder="Enter Order Quantity..."
+                      type='number'
+                      className='form-control'
+                      placeholder='Enter Order Quantity...'
                     />
                   </div>
-                  <div className="col-lg-12 mb-3">
-                    <label for="reception_date" className="form-label">
+                  <div className='col-lg-12 mb-3'>
+                    <label for='reception_date' className='form-label'>
                       Reception Date
                     </label>
-                    <input type="date" className="form-control" />
+                    <input type='date' className='form-control' />
                   </div>
-                  <div className="mb-2 text-center">
-                    <button className="btn btn-primary">Submit</button>
+                  <div className='mb-2 text-center'>
+                    <button className='btn btn-primary'>Submit</button>
                     &nbsp;&nbsp;
                     <button
-                      className="btn btn-outline-primary"
-                      data-bs-dismiss="modal"
-                    >
+                      className='btn btn-outline-primary'
+                      data-bs-dismiss='modal'>
                       Cancel
                     </button>
                   </div>
