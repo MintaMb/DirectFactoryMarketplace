@@ -12,7 +12,6 @@ const ProductDetails = () => {
   const [productDetailData, setProductDetailData] = useState({});
   const { setSpinner, spinner } = useContext(GlobalContext);
   // ================== get list api
-  console.log(useParams(), "_id");
   const productDetail = async () => {
     setSpinner(true);
     let token = localStorage.getItem("Token");

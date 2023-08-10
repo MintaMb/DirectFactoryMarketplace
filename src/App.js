@@ -70,7 +70,7 @@ function App() {
                   element={<CreateOrder />}
                 />
                 <Route
-                  path="/orders/manual-order-input/order-details"
+                  path="/order/manual-order-input/order-details/:id"
                   element={<Orderdetails />}
                 />
               </Route>

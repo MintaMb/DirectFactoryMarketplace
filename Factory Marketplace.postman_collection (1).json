@@ -396,7 +396,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGE1ODNhZDI0Y2Y2NjUxZjRlZTdkNDciLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCIsImxhc3RfbmFtZSI6IlNhaHUiLCJwaG9uZSI6Ijk4Nzg0ODE4OTAiLCJlbWFpbCI6InBhcmRlZXBzYWh1Lm5leGV2ZXJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJkYWljaGkiLCJwYXNzd29yZCI6IiQyYSQwOCRhYVloeVgvZmpzaWs2RDZtZ1RpZUl1dFFmcnhzNTdzcnFWU3VuYVgzR3pIWERQZWtkQ1o0NiIsImlzX2VtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiaXNfdHJhc2giOmZhbHNlLCJpc19hY3RpdmUiOnRydWUsImNvbXBhbnlfaWQiOiI2NGIzOGQ0NTNjNWQ5ZTQxNDNhOTViMGUiLCJmYWN0b3J5X2lkIjoiMSIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTA1VDE0OjUyOjMwLjAxMloiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wNy0wNVQxNDo1MjozMC4wMTNaIiwiX192IjowLCJpYXQiOjE2OTA5MTE5ODF9.nQuKDmLO7jGKw1n2t9cOPX5mc57bweKb0XKN1d5B3Ls",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCB1cGRhdGVkIiwibGFzdF9uYW1lIjoiU2FodSIsInBob25lIjoiOTg3ODQ4MTg5MCIsImVtYWlsIjoicGFyZGVlcHNhaHUubmV4ZXZlckBnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImRhaWNoaSIsInBhc3N3b3JkIjoiJDJhJDA4JHIyRzNmSmprME90ZVVhV1RZSmthNmU0UUppOENCRFpVLzhGeHouSDF1WUdYL3hoelB5RmxhIiwiaXNfZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJlbWFpbF92ZXJpZmllZF9hdCI6bnVsbCwiaXNfdHJhc2giOmZhbHNlLCJpc19hY3RpdmUiOnRydWUsImNvbXBhbnlfaWQiOiIxIiwiZmFjdG9yeV9pZCI6IjEwMDAxIiwidXNlcl90eXBlIjoiY2xpZW50IiwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMTlUMTM6MDI6MDcuNjg2WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA4LTA2VDE4OjIwOjQ1LjcyNVoiLCJfX3YiOjAsImlhdCI6MTY5MTUxMTg4OH0.bI91pSOEF_f96fLXqbuwE70ncthtNWgXLAU-fOMBtfY",
 									"type": "string"
 								}
 							]
@@ -405,7 +405,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"first_name\": \"Sheetal\",\r\n    \"email\": \"sheetal@yopmail.com\",\r\n    \"phone\": \"8956852256\",\r\n    \"password\": \"123456\",\r\n    \"permissions\": \"['inventory', 'order', 'message']\"\r\n}",
+							"raw": "{\r\n    \"first_name\": \"Sheetal\",\r\n    \"email\": \"sheetalkapoor1996@yopmail.com\",\r\n    \"phone\": \"8956852256\",\r\n    \"password\": \"123456\",\r\n    \"permissions\": \"[\\\"inventory\\\",\\\"loss profit\\\",\\\"add-Ons\\\"]\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -413,11 +413,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://kayhancodestore.online:3004/api/add_client_user",
+							"raw": "http://localhost:3004/api/add_client_user",
 							"protocol": "http",
 							"host": [
-								"kayhancodestore",
-								"online"
+								"localhost"
 							],
 							"port": "3004",
 							"path": [
@@ -436,7 +435,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGE1ODNhZDI0Y2Y2NjUxZjRlZTdkNDciLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCIsImxhc3RfbmFtZSI6IlNhaHUiLCJwaG9uZSI6Ijk4Nzg0ODE4OTAiLCJlbWFpbCI6InBhcmRlZXBzYWh1Lm5leGV2ZXJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJkYWljaGkiLCJwYXNzd29yZCI6IiQyYSQwOCRhYVloeVgvZmpzaWs2RDZtZ1RpZUl1dFFmcnhzNTdzcnFWU3VuYVgzR3pIWERQZWtkQ1o0NiIsImlzX2VtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiaXNfdHJhc2giOmZhbHNlLCJpc19hY3RpdmUiOnRydWUsImNvbXBhbnlfaWQiOiIxIiwiZmFjdG9yeV9pZCI6IjEiLCJ1c2VyX3R5cGUiOiJjbGllbnQiLCJjcmVhdGVkX2F0IjoiMjAyMy0wNy0wNVQxNDo1MjozMC4wMTJaIiwidXBkYXRlZF9hdCI6IjIwMjMtMDctMDVUMTQ6NTI6MzAuMDEzWiIsIl9fdiI6MCwiaWF0IjoxNjg4NTc0NTY4fQ.mVs4C2-jACv4De7eg2L_SGdptzlpMEoVJGX3RmxjmVk",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCIsImxhc3RfbmFtZSI6IlNhaHUiLCJwaG9uZSI6Ijk4Nzg0ODE4OTAiLCJlbWFpbCI6InBhcmRlZXBzYWh1Lm5leGV2ZXJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJkYWljaGkiLCJwYXNzd29yZCI6IiQyYSQwOCRyMkczZkpqazBPdGVVYVdUWUprYTZlNFFKaThDQkRaVS84Rnh6LkgxdVlHWC94aHpQeUZsYSIsImlzX2VtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZW1haWxfdmVyaWZpZWRfYXQiOm51bGwsImlzX3RyYXNoIjpmYWxzZSwiaXNfYWN0aXZlIjp0cnVlLCJjb21wYW55X2lkIjoiMSIsImZhY3RvcnlfaWQiOiIxIiwidXNlcl90eXBlIjoiY2xpZW50IiwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMTlUMTM6MDI6MDcuNjg2WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA3LTE5VDEzOjAyOjA3LjY4N1oiLCJfX3YiOjAsImlhdCI6MTY5MTMzNjQ0M30.k4bg8fMLAaeAnyngFkYsYVvYR01JlnED8fJ5IodHRZU\n\n\n",
 									"type": "string"
 								}
 							]
@@ -445,7 +444,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user_id\": \"64a5a42553d7bf16c81fd0e6\",\r\n    \"first_name\": \"Mukesh Kumar\",\r\n    \"email\": \"mukesh_kumar012@gmail.com\",\r\n    \"phone\": \"8956852599\",\r\n    \"password\": \"123456\",\r\n    \"permissions\": \"['inventory', 'order']\"\r\n}",
+							"raw": "{\r\n    \"user_id\": \"64d143c75f471f44b4e139e6\",\r\n    \"first_name\": \"Sheetal kapoor\",\r\n    \"email\": \"mukesh_kumar012@gmail.com\",\r\n    \"phone\": \"8956852599\",\r\n    \"password\": \"123456\",\r\n    \"permissions\": \"['inventory', 'order']\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -453,10 +452,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3004/api/update_client_user",
+							"raw": "http://kayhancodestore.online:3004/api/update_client_user",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"kayhancodestore",
+								"online"
 							],
 							"port": "3004",
 							"path": [
@@ -506,7 +506,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCIsImxhc3RfbmFtZSI6IlNhaHUiLCJwaG9uZSI6Ijk4Nzg0ODE4OTAiLCJlbWFpbCI6InBhcmRlZXBzYWh1Lm5leGV2ZXJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJkYWljaGkiLCJwYXNzd29yZCI6IiQyYSQwOCRyMkczZkpqazBPdGVVYVdUWUprYTZlNFFKaThDQkRaVS84Rnh6LkgxdVlHWC94aHpQeUZsYSIsImlzX2VtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZW1haWxfdmVyaWZpZWRfYXQiOm51bGwsImlzX3RyYXNoIjpmYWxzZSwiaXNfYWN0aXZlIjp0cnVlLCJjb21wYW55X2lkIjoiMSIsImZhY3RvcnlfaWQiOiIxIiwidXNlcl90eXBlIjoiY2xpZW50IiwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMTlUMTM6MDI6MDcuNjg2WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA3LTE5VDEzOjAyOjA3LjY4N1oiLCJfX3YiOjAsImlhdCI6MTY5MTI2MzEyOX0.HlRn3DSz_o44QNXA0X_0Z0zK7cUYpOwIw62Oivv2-As",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCB1cGRhdGVkIiwibGFzdF9uYW1lIjoiU2FodSIsInBob25lIjoiOTg3ODQ4MTg5MCIsImVtYWlsIjoicGFyZGVlcHNhaHUubmV4ZXZlckBnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImRhaWNoaSIsInBhc3N3b3JkIjoiJDJhJDA4JHIyRzNmSmprME90ZVVhV1RZSmthNmU0UUppOENCRFpVLzhGeHouSDF1WUdYL3hoelB5RmxhIiwiaXNfZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJlbWFpbF92ZXJpZmllZF9hdCI6bnVsbCwiaXNfdHJhc2giOmZhbHNlLCJpc19hY3RpdmUiOnRydWUsImNvbXBhbnlfaWQiOiIxIiwiZmFjdG9yeV9pZCI6IjEwMDAxIiwidXNlcl90eXBlIjoiY2xpZW50IiwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMTlUMTM6MDI6MDcuNjg2WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA4LTA2VDE4OjIwOjQ1LjcyNVoiLCJfX3YiOjAsImlhdCI6MTY5MTUxMTg4OH0.bI91pSOEF_f96fLXqbuwE70ncthtNWgXLAU-fOMBtfY",
 									"type": "string"
 								}
 							]
@@ -514,11 +514,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://kayhancodestore.online:3004/api/all_client_user",
+							"raw": "http://localhost:3004/api/all_client_user",
 							"protocol": "http",
 							"host": [
-								"kayhancodestore",
-								"online"
+								"localhost"
 							],
 							"port": "3004",
 							"path": [
@@ -581,7 +580,7 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Casual Shoes",
+									"value": "Casual Shirts",
 									"type": "text"
 								},
 								{
@@ -631,7 +630,7 @@
 								},
 								{
 									"key": "factory_id",
-									"value": "1",
+									"value": "10001",
 									"type": "text"
 								},
 								{
@@ -670,7 +669,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCIsImxhc3RfbmFtZSI6IlNhaHUiLCJwaG9uZSI6Ijk4Nzg0ODE4OTAiLCJlbWFpbCI6InBhcmRlZXBzYWh1Lm5leGV2ZXJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJkYWljaGkiLCJwYXNzd29yZCI6IiQyYSQwOCRyMkczZkpqazBPdGVVYVdUWUprYTZlNFFKaThDQkRaVS84Rnh6LkgxdVlHWC94aHpQeUZsYSIsImlzX2VtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZW1haWxfdmVyaWZpZWRfYXQiOm51bGwsImlzX3RyYXNoIjpmYWxzZSwiaXNfYWN0aXZlIjp0cnVlLCJjb21wYW55X2lkIjoiMSIsImZhY3RvcnlfaWQiOiIxIiwidXNlcl90eXBlIjoiY2xpZW50IiwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMTlUMTM6MDI6MDcuNjg2WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA3LTE5VDEzOjAyOjA3LjY4N1oiLCJfX3YiOjAsImlhdCI6MTY5MTMzNjI5OH0.cJtsAHFkW1MfFj7Y9t1l6pIW16PGaMpohrNgre3cS6g",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCB1cGRhdGVkIiwibGFzdF9uYW1lIjoiU2FodSIsInBob25lIjoiOTg3ODQ4MTg5MCIsImVtYWlsIjoicGFyZGVlcHNhaHUubmV4ZXZlckBnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImRhaWNoaSIsInBhc3N3b3JkIjoiJDJhJDA4JHIyRzNmSmprME90ZVVhV1RZSmthNmU0UUppOENCRFpVLzhGeHouSDF1WUdYL3hoelB5RmxhIiwiaXNfZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJlbWFpbF92ZXJpZmllZF9hdCI6bnVsbCwiaXNfdHJhc2giOmZhbHNlLCJpc19hY3RpdmUiOnRydWUsImNvbXBhbnlfaWQiOiIxIiwiZmFjdG9yeV9pZCI6IjEwMDAxIiwidXNlcl90eXBlIjoiY2xpZW50IiwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMTlUMTM6MDI6MDcuNjg2WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA4LTA2VDE4OjIwOjQ1LjcyNVoiLCJfX3YiOjAsImlhdCI6MTY5MTUxMTg4OH0.bI91pSOEF_f96fLXqbuwE70ncthtNWgXLAU-fOMBtfY",
 									"type": "string"
 								}
 							]
@@ -678,10 +677,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3004/api/all_products",
+							"raw": "http://kayhancodestore.online:3004/api/all_products",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"kayhancodestore",
+								"online"
 							],
 							"port": "3004",
 							"path": [
@@ -1188,7 +1188,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGE1YTQyNTUzZDdiZjE2YzgxZmQwZTYiLCJmaXJzdF9uYW1lIjoiTXVrZXNoIEt1bWFyIiwibGFzdF9uYW1lIjoiZmFsc2UiLCJwaG9uZSI6Ijg5NTY4NTI1OTkiLCJlbWFpbCI6Im11a2VzaF9rdW1hcjAxMkBnbWFpbC5jb20iLCJ1c2VybmFtZSI6Im11a2VzaGt1bWFyIiwicGFzc3dvcmQiOiIkMmEkMDgkYVlib1BuclozWkRBYmVDN1ppLzk5ZVAzeWhJZzY4ME1wR25wU2tpWWZZVHpaV3hJdVR4eC4iLCJpc19lbWFpbF92ZXJpZmllZCI6ZmFsc2UsImlzX3RyYXNoIjpmYWxzZSwiaXNfYWN0aXZlIjpmYWxzZSwiY29tcGFueV9pZCI6IjEiLCJmYWN0b3J5X2lkIjoiMiIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTA1VDE3OjExOjAxLjIxMVoiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wNy0xMlQxNjo1NzowOS43NjBaIiwiX192IjowLCJpYXQiOjE2OTA5MDQ1MTN9.q3Q3dGwGr-VC_LcmClIXRNTp1DY84KTUc-4Gx9_99d4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCB1cGRhdGVkIiwibGFzdF9uYW1lIjoiU2FodSIsInBob25lIjoiOTg3ODQ4MTg5MCIsImVtYWlsIjoicGFyZGVlcHNhaHUubmV4ZXZlckBnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImRhaWNoaSIsInBhc3N3b3JkIjoiJDJhJDA4JHIyRzNmSmprME90ZVVhV1RZSmthNmU0UUppOENCRFpVLzhGeHouSDF1WUdYL3hoelB5RmxhIiwiaXNfZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJlbWFpbF92ZXJpZmllZF9hdCI6bnVsbCwiaXNfdHJhc2giOmZhbHNlLCJpc19hY3RpdmUiOnRydWUsImNvbXBhbnlfaWQiOiIxIiwiZmFjdG9yeV9pZCI6IjEwMDAxIiwidXNlcl90eXBlIjoiY2xpZW50IiwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMTlUMTM6MDI6MDcuNjg2WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA4LTA2VDE4OjIwOjQ1LjcyNVoiLCJfX3YiOjAsImlhdCI6MTY5MTUxMTg4OH0.bI91pSOEF_f96fLXqbuwE70ncthtNWgXLAU-fOMBtfY",
 									"type": "string"
 								}
 							]
@@ -1197,7 +1197,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"customer_id\": \"64bebe01a8b39df4e24435ba\",\r\n    \"customer_name\": \"Kunal Gandhi\",\r\n    \"customer_mobile\": \"8837890492\",\r\n    \"customer_address\": \"SAS Nagar, IT Park, Sector 75 8A\",\r\n    \"total_order_price\": \"1300\",\r\n    \"gst\": \"20\",\r\n    \"discount\": \"20\",\r\n    \"shipping_charges\": \"25\",\r\n    \"grand_total\": \"1325\",\r\n    \"orderItems\": \"[{\\\"product_id\\\": \\\"64b00a79a5396afddafce5bf\\\", \\\"quantity\\\": \\\"2\\\", \\\"currency\\\": \\\"USD\\\", \\\"product_price\\\": \\\"650\\\", \\\"total_price\\\": \\\"1300\\\"}]\"\r\n}",
+							"raw": "{\r\n    \"client_id\": \"64b38d453c5d9e4143a95b0e\",\r\n    \"factory_id\": \"10001\",\r\n    \"customer_id\": \"64bebe01a8b39df4e24435ba\",\r\n    \"customer_name\": \"Kunal Gandhi\",\r\n    \"customer_mobile\": \"8837890492\",\r\n    \"customer_address\": \"SAS Nagar, IT Park, Sector 75 8A\",\r\n    \"total_order_price\": \"1100\",\r\n    \"gst\": \"20\",\r\n    \"discount\": \"20\",\r\n    \"shipping_charges\": \"25\",\r\n    \"grand_total\": \"1125\",\r\n    \"orderItems\": \"[{\\\"product_id\\\": \\\"64c749e37c99fa4b1dd14373\\\", \\\"quantity\\\": \\\"1\\\", \\\"currency\\\": \\\"USD\\\", \\\"product_price\\\": \\\"1100\\\", \\\"total_price\\\": \\\"1100\\\"}]\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1445,6 +1445,45 @@
 							"path": [
 								"api",
 								"view_all_inventories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client Dashboard Detail",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCB1cGRhdGVkIiwibGFzdF9uYW1lIjoiU2FodSIsInBob25lIjoiOTg3ODQ4MTg5MCIsImVtYWlsIjoicGFyZGVlcHNhaHUubmV4ZXZlckBnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImRhaWNoaSIsInBhc3N3b3JkIjoiJDJhJDA4JHIyRzNmSmprME90ZVVhV1RZSmthNmU0UUppOENCRFpVLzhGeHouSDF1WUdYL3hoelB5RmxhIiwiaXNfZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJlbWFpbF92ZXJpZmllZF9hdCI6bnVsbCwiaXNfdHJhc2giOmZhbHNlLCJpc19hY3RpdmUiOnRydWUsImNvbXBhbnlfaWQiOiIxIiwiZmFjdG9yeV9pZCI6IjEwMDAxIiwidXNlcl90eXBlIjoiY2xpZW50IiwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMTlUMTM6MDI6MDcuNjg2WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA4LTA2VDE4OjIwOjQ1LjcyNVoiLCJfX3YiOjAsImlhdCI6MTY5MTUxMTg4OH0.bI91pSOEF_f96fLXqbuwE70ncthtNWgXLAU-fOMBtfY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"client_id\": \"64b38d453c5d9e4143a95b0e\",\r\n    \"factory_id\": \"10001\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3004/api/client_dashboard_detail",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3004",
+							"path": [
+								"api",
+								"client_dashboard_detail"
 							]
 						}
 					},

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
+import { GlobalContext } from "../../App";
 
 const CreateProduct = () => {
   const {
@@ -18,8 +19,10 @@ const CreateProduct = () => {
   const [rows, setRows] = useState([{}]);
   const [editProduct, seteditProduct] = useState();
   const [eventImage, setEventImage] = useState([]);
+  const { setSpinner, spinner } = useContext(GlobalContext);
   //===================  create product post api
   const productForm = async (data) => {
+    setSpinner(true)
     try {
       let formData = new FormData();
       formData.append("product_id", id);
@@ -84,6 +87,7 @@ const CreateProduct = () => {
     } catch (errors) {
       console.error("An error occurred:", errors);
     }
+    setSpinner(true);
   };
   console.log(watch().images,"watch");
   // ================== get product list api
@@ -343,6 +347,24 @@ const CreateProduct = () => {
                               Upload Product Images{" "}
                               <span className="text-danger">*</span>
                             </label>
+                            {/* <Controller
+                              name="images"
+                              control={control}
+                              defaultValue={[]}
+                              rules={{ required: "Product Images is required" }}
+                              render={({ field }) => (
+                                <div>
+                                  <input
+                                    type="file"
+                                    multiple
+                                    className="form-control product_image"
+                                    onChange={(e) =>
+                                      field.onChange(e.target.files)
+                                    }
+                                  />
+                                </div>
+                              )}
+                            /> */}
                             <input
                               id="eventImages"
                               onChange={(e) => handleImage(e)}
