@@ -74,10 +74,13 @@ const Overview = () => {
           body: JSON.stringify(formattedData),
         }
       );
+      console.log(formattedData, "response?.data");
       const responseData = await response.json(); // Always parse the response data as JSON
       if (response.status === 200) {
+        const overviewData = responseData.data || [""];
+        console.log(responseData.data, "responseData.data");
         reset(); // Define the reset() function
-        setDashboardData(response?.data);
+        setDashboardData(overviewData);
       } else {
         toast.error(responseData?.message || "An error occurred", {
           autoClose: 5000,
@@ -92,6 +95,7 @@ const Overview = () => {
   useEffect(() => {
     restApiGetDasboardData();
   }, []);
+  console.log(dashboardData, "dashboardData");
   return (
     <>
       <div id='wrapper'>
