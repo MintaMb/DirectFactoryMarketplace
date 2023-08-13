@@ -13,7 +13,15 @@ const User = () => {
   const [postModal, setPostModal] = useState(false);
   const { setSpinner, spinner } = useContext(GlobalContext);
   const [deleteShow, setDShow] = useState(false);
-  const [userShow, setUserShow] = useState(false);
+  // modal show/Hide  functions
+  const [modalShow, setShowModal] = useState(false);
+  const showModal = () => {
+    setShowModal(true);
+  };
+
+  const hideModal = () => {
+    setShowModal(false);
+  };
   const permissions = [
     { name: "Inventory", value: "inventory" },
     { name: "Order", value: "order" },
@@ -64,6 +72,7 @@ const User = () => {
   // Function to add a new user
   const [id, setId] = useState();
   const userForm = async (data) => {
+    setSpinner(true);
     try {
       // Convert the permissions array to a JSON string and replace double quotes with single quotes
       const formattedPermissions = JSON.stringify(data.permissions).replace(
@@ -94,7 +103,8 @@ const User = () => {
 
       if (response?.status === 200) {
         reset(); // Define the reset() function
-        setUserShow(false);
+        hideModal();
+        userListing();
         toast.success(
           `${id ? "User Updated successfully" : "User added successfully"}`
         );
@@ -111,7 +121,10 @@ const User = () => {
     } catch (error) {
       console.error("An error occurred:", error);
       // Handle any additional error handling here
+      setSpinner(false);
     }
+
+    setSpinner(false);
   };
   // ====== edit user
   const [getUserData, setGetUserData] = useState();
@@ -213,10 +226,8 @@ const User = () => {
                                 <button
                                   type='button'
                                   className='btn btn-primary waves-effect waves-light'
-                                  data-bs-toggle='modal'
-                                  data-bs-target='#create-user-model'
                                   onClick={() => {
-                                    setUserShow(true);
+                                    showModal();
                                     // setProduct(item);
                                   }}>
                                   <span className='btn-label'>
@@ -255,17 +266,6 @@ const User = () => {
                                       <td>{item?.phone ? item?.phone : "-"}</td>
                                       <td>{item?.email ? item?.email : "-"}</td>
                                       <td>
-                                        {/* {item?.permissions
-                                          ? item.permissions
-                                              .replace(/"/g, "") // Remove double quotes
-                                              .replace(/^\[|\]$/g, "") // Remove square brackets
-                                              .split(",") // Split into an array
-                                              .map((permission) =>
-                                                permission.trim()
-                                              ) // Remove spaces around each element
-                                              .join(", ")
-                                          : "-"} */}
-
                                         {item?.permissions
                                           ? item.permissions
                                               .map((permission) =>
@@ -288,12 +288,13 @@ const User = () => {
                                         </button>
                                         <button
                                           className='btn btn-primary btn-sm mx-1'
-                                          data-bs-toggle='modal'
-                                          data-bs-target='#create-user-model'
+                                          // data-bs-toggle='modal'
+                                          // data-bs-target='#create-user-model'
                                           onClick={() => {
                                             setPostModal(true);
                                             editUser(item?._id);
                                             setId(item?._id);
+                                            showModal();
                                           }}>
                                           <span className='mdi mdi-square-edit-outline'></span>{" "}
                                           Edit
@@ -352,117 +353,122 @@ const User = () => {
           </div>
         </div>
       </div>
-      <div
-        id='create-user-model'
-        className='modal fade'
-        tabindex='-1'
-        role='dialog'
-        aria-hidden='true'>
-        <div className='modal-dialog'>
-          <div className='modal-content'>
-            <div className='modal-body'>
-              <div className='text-center mt-2 mb-4'>
-                <div className='auth-logo'>
-                  <h4 className='mt-2 text-primary'>Assign New User</h4>
-                </div>
-              </div>
-              <form className='px-3 row' onSubmit={handleSubmit(userForm)}>
-                <div className='mb-2 col-lg-6'>
-                  <label for='name' className='form-label'>
-                    Name
-                  </label>
-                  <input
-                    className='form-control'
-                    {...register("first_name")}
-                    type='name'
-                    id='name'
-                    required=''
-                    placeholder='Enter Name..'
-                  />
-                </div>
-                <div className='mb-2 col-lg-6'>
-                  <label for='email' className='form-label'>
-                    Email Address
-                  </label>
-                  <input
-                    className='form-control'
-                    type='email'
-                    {...register("email")}
-                    id='email'
-                    required=''
-                    placeholder='Enter Email Address..'
-                  />
-                </div>
-                <div className='mb-2 col-lg-6'>
-                  <label for='mobile_number' className='form-label'>
-                    Mobile Number
-                  </label>
-                  <input
-                    className='form-control'
-                    type='mobile_number'
-                    {...register("phone")}
-                    required=''
-                    onKeyPress={(offer) => {
-                      if (!/[0-9]/.test(offer.key)) {
-                        offer.preventDefault();
-                      }
-                    }}
-                    id='mobile_number'
-                    placeholder='Enter Mobile Number..'
-                  />
-                </div>
-                <div className='mb-2 col-lg-6'>
-                  <label for='password' className='form-label'>
-                    Password
-                  </label>
-                  <input
-                    className='form-control'
-                    type='password'
-                    {...register("password")}
-                    required=''
-                    id='password'
-                    placeholder='Enter your Password'
-                  />
-                </div>
-                <div className='mb-1 col-lg-12'>
-                  <label>Select Permissions</label>
-                </div>
-                {permissions.map((permission) => (
-                  <div className='mb-1 col-lg-4' key={permission}>
-                    <input
-                      type='checkbox'
-                      className='form-check-input'
-                      {...register("permissions")}
-                      value={permission?.value} // Capture the selected permission value
-                    />
-                    &nbsp;&nbsp;{permission?.name}
+      {/* ========= user moal  */}
+      {modalShow && (
+        <div
+          id='create-customer-model'
+          className={`modal ${modalShow ? "d-flex show-modal" : ""} `}
+          tabindex='-1'
+          role='dialog'
+          aria-hidden='true'>
+          <div className='modal-dialog'>
+            <div className='modal-content'>
+              <div className='modal-body'>
+                <div className='text-center mt-2 mb-4'>
+                  <div className='auth-logo'>
+                    <h4 className='mt-2 text-primary'>Assign New User</h4>
                   </div>
-                ))}
-                <div className='mt-2 col-lg-12 text-center'>
-                  <button
-                    className='btn btn-primary'
-                    onClick={() => {
-                      setUserShow(false);
-                    }}>
-                    Submit
-                  </button>
-                  &nbsp;&nbsp;
-                  <button
-                    className='btn btn-outline-danger'
-                    data-bs-dismiss='modal'
-                    type='button'
-                    onClick={() => {
-                      reset();
-                      setId();
-                    }}>
-                    Cancel
-                  </button>
                 </div>
-              </form>
+                <form className='px-3 row' onSubmit={handleSubmit(userForm)}>
+                  <div className='mb-2 col-lg-6'>
+                    <label for='name' className='form-label'>
+                      Name
+                    </label>
+                    <input
+                      className='form-control'
+                      {...register("first_name")}
+                      type='name'
+                      id='name'
+                      required=''
+                      placeholder='Enter Name..'
+                    />
+                  </div>
+                  <div className='mb-2 col-lg-6'>
+                    <label for='email' className='form-label'>
+                      Email Address
+                    </label>
+                    <input
+                      className='form-control'
+                      type='email'
+                      {...register("email")}
+                      id='email'
+                      required=''
+                      placeholder='Enter Email Address..'
+                    />
+                  </div>
+                  <div className='mb-2 col-lg-6'>
+                    <label for='mobile_number' className='form-label'>
+                      Mobile Number
+                    </label>
+                    <input
+                      className='form-control'
+                      type='mobile_number'
+                      maxLength={15}
+                      {...register("phone")}
+                      required=''
+                      onKeyPress={(offer) => {
+                        if (!/[0-9]/.test(offer.key)) {
+                          offer.preventDefault();
+                        }
+                      }}
+                      id='mobile_number'
+                      placeholder='Enter Mobile Number..'
+                    />
+                  </div>
+                  <div className='mb-2 col-lg-6'>
+                    <label for='password' className='form-label'>
+                      Password
+                    </label>
+                    <input
+                      className='form-control'
+                      type='password'
+                      {...register("password")}
+                      required=''
+                      id='password'
+                      placeholder='Enter your Password'
+                    />
+                  </div>
+                  <div className='mb-1 col-lg-12'>
+                    <label>Select Permissions</label>
+                  </div>
+                  {permissions.map((permission) => (
+                    <div className='mb-1 col-lg-4' key={permission}>
+                      <input
+                        type='checkbox'
+                        className='form-check-input'
+                        {...register("permissions")}
+                        value={permission?.value} // Capture the selected permission value
+                      />
+                      &nbsp;&nbsp;{permission?.name}
+                    </div>
+                  ))}
+                  <div className='mt-2 col-lg-12 text-center'>
+                    <button
+                      className='btn btn-primary'
+                      onClick={() => {
+                        showModal();
+                      }}>
+                      Submit
+                    </button>
+                    &nbsp;&nbsp;
+                    <button
+                      className='btn btn-outline-danger'
+                      data-bs-dismiss='modal'
+                      type='button'
+                      onClick={() => {
+                        reset();
+                        setId();
+                        hideModal();
+                      }}>
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

@@ -25,8 +25,8 @@ const CreateOrder = () => {
   const [gstTax, setGstTax] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [shippingCharge, setShippingCharge] = useState(0);
-  const [userShow, setUserShow] = useState(false);
   // modal show/Hide  functions
+  const [userShow, setUserShow] = useState(false);
   const showUserModal = () => {
     setUserShow(true);
   };
@@ -42,7 +42,7 @@ const CreateOrder = () => {
     if (selectedProducts.length > 0) {
       variations = selectedProducts.map((product) => ({
         product_id: product._id,
-        quantity: product.quantity,
+        quantity: product.quantity ? product.quantity : "1",
       }));
     }
 
@@ -337,6 +337,7 @@ const CreateOrder = () => {
                               type='text'
                               className='form-control'
                               placeholder='Enter Mobile Number...'
+                              maxLength={15}
                               onKeyPress={(event) => {
                                 if (!/[0-9]/.test(event.key)) {
                                   event.preventDefault();
@@ -579,6 +580,7 @@ const CreateOrder = () => {
                       <input
                         className='form-control'
                         {...register("customePhone")}
+                        maxLength={15}
                         type='text'
                         required=''
                         onKeyPress={(offer) => {

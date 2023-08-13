@@ -18,6 +18,8 @@ import Order from "./component/order/Order";
 import ManualOrderInput from "./component/order/ManualOrderInput";
 import CreateOrder from "./component/order/CreateOrder";
 import Orderdetails from "./component/order/Orderdetails";
+import AddOns from "./component/add-on/AddOns";
+import AddOnsHistory from "./component/add-on/AddOnsHistory";
 export const GlobalContext = createContext(null);
 
 function App() {
@@ -31,54 +33,60 @@ function App() {
           <ToastContainer autoClose={3000} />
           {localStorage.getItem("Token") ? (
             <Routes>
-              <Route path="/" element={<Navigate to="/overview" replace />} />
-              <Route path="/" element={<PortalLayout />}>
-                <Route exect path="/overview" element={<Overview />} />
-                <Route path="/inventory" element={<Inventory />} />
+              <Route path='/' element={<Navigate to='/overview' replace />} />
+              <Route path='/' element={<PortalLayout />}>
+                <Route exect path='/overview' element={<Overview />} />
+                <Route path='/inventory' element={<Inventory />} />
                 <Route
-                  path="/inventory/inventory-list"
+                  path='/inventory/inventory-list'
                   element={<InventoryListing />}
                 />
                 <Route
-                  path="/inventory/product-list"
+                  path='/inventory/product-list'
                   element={<ProductList />}
                 />
                 <Route
-                  path="/inventory/product-details/:id"
+                  path='/inventory/product-details/:id'
                   element={<ProductDetails />}
                 />
                 <Route
-                  path="/inventory/create-product"
+                  path='/inventory/create-product'
                   element={<CreateProduct />}
                 />
                 <Route
-                  path="/inventory/edit-product/:id"
+                  path='/inventory/edit-product/:id'
                   element={<CreateProduct />}
                 />
-                <Route path="/user" element={<User />} />
+                <Route path='/user' element={<User />} />
                 <Route
-                  path="inventory/stock-order-history"
+                  path='inventory/stock-order-history'
                   element={<OrderHistory />}
                 />
-                <Route path="/order" element={<Order />} />
+                <Route path='/order' element={<Order />} />
                 <Route
-                  path="/order/manual-order-input"
+                  path='/order/manual-order-input'
                   element={<ManualOrderInput />}
                 />
                 <Route
-                  path="/order/manual-order-input/create-order"
+                  path='/order/manual-order-input/create-order'
                   element={<CreateOrder />}
                 />
+
                 <Route
-                  path="/order/manual-order-input/order-details/:id"
+                  path='/order/manual-order-input/order-details/:id'
                   element={<Orderdetails />}
+                />
+                <Route path='/add-ons' element={<AddOns />} />
+                <Route
+                  path='/add-ons/add-ons-history'
+                  element={<AddOnsHistory />}
                 />
               </Route>
             </Routes>
           ) : (
             <Routes>
-              <Route path="*" element={<Navigate to="/" replace />} />
-              <Route path="/" element={<ClientLogin />} />
+              <Route path='*' element={<Navigate to='/' replace />} />
+              <Route path='/' element={<ClientLogin />} />
             </Routes>
           )}
         </HashRouter>

@@ -18,6 +18,16 @@ const Inventory = () => {
   const { register, watch, handleSubmit, reset, setValue } = useForm({
     mode: "all",
   });
+
+  // modal show/Hide  functions
+  const [modalShow, setShowModal] = useState(false);
+  const showModal = () => {
+    setShowModal(true);
+  };
+
+  const hideModal = () => {
+    setShowModal(false);
+  };
   // ================== get list api
   const inventoryListing = async () => {
     setSpinner(true);
@@ -108,6 +118,7 @@ const Inventory = () => {
       const responseData = await response.json(); // Always parse the response data as JSON
       if (response.status === 200) {
         reset(); // Define the reset() function
+        hideModal();
         setTimeout(() => {
           // You might want to do something here
         }, 500);
@@ -340,8 +351,9 @@ const Inventory = () => {
                         <div className='col-lg-4 text-end mb-2'>
                           <button
                             className='btn btn-primary'
-                            data-bs-toggle='modal'
-                            data-bs-target='#order-model'>
+                            type='button'
+                            onClick={showModal} // Changed from data-bs-toggle and data-bs-target
+                          >
                             Add New Stock
                           </button>
                           <button className='btn btn-primary mx-2'>
@@ -380,11 +392,12 @@ const Inventory = () => {
                                             <td width='180px'>
                                               <button
                                                 className='btn btn-primary btn-sm'
-                                                data-bs-toggle='modal'
-                                                data-bs-target='#order-model'
+                                                // data-bs-toggle='modal'
+                                                // data-bs-target='#order-model'
                                                 onClick={() => {
                                                   setInventoryShow(true);
                                                   setProduct(item);
+                                                  showModal();
                                                 }}>
                                                 Order More
                                               </button>
@@ -547,99 +560,105 @@ const Inventory = () => {
         </div>
       </div>
       {/* ==== inventory modal */}
-      <div
-        id='order-model'
-        className='modal fade'
-        tabindex='-1'
-        role='dialog'
-        aria-hidden='true'>
-        <div className='modal-dialog'>
-          <div className='modal-content'>
-            <div className='modal-body'>
-              <div className='text-center mt-0 mb-2'>
-                <div className='auth-logo'>
-                  <h4 className='mt-4 text-primary text-start mb-0'>
-                    Add New Stock
-                  </h4>
-                  <hr />
+      {modalShow && (
+        <div
+          id='create-customer-model'
+          className={`modal ${modalShow ? "d-flex show-modal" : ""} `}
+          tabindex='-1'
+          role='dialog'
+          aria-hidden='true'>
+          <div className='modal-dialog'>
+            <div className='modal-content'>
+              <div className='modal-body'>
+                <div className='text-center mt-0 mb-2'>
+                  <div className='auth-logo'>
+                    <h4 className='mt-4 text-primary text-start mb-0'>
+                      Add New Stock
+                    </h4>
+                    <hr />
+                  </div>
                 </div>
+                <form className='px-3 ' onSubmit={handleSubmit(inventoryForm)}>
+                  <div className='row'>
+                    <div className='col-lg-12 mb-2'>
+                      <label for='product_name' className='form-label'>
+                        Product
+                      </label>
+                      <select
+                        className={` form-select }`}
+                        {...register("product_id")}
+                        value={watch()?.product_id}>
+                        <option value='' className='option'>
+                          Select Product
+                        </option>
+                        {productData?.map((item, index) => {
+                          return (
+                            <option value={item?._id} key={index + 1}>
+                              {item?.name}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                    <div className='col-lg-6 mb-2'>
+                      <label for='order_price' className='form-label'>
+                        Total Order Price
+                      </label>
+                      <input
+                        type='number'
+                        {...register("total_price")}
+                        className='form-control'
+                        placeholder='Enter Total Order Price...'
+                      />
+                    </div>
+                    <div className='col-lg-6 mb-2'>
+                      <label for='order_qty' className='form-label'>
+                        Order Qty.
+                      </label>
+                      <input
+                        type='number'
+                        className='form-control'
+                        {...register("quantity")}
+                        placeholder='Enter Order Quantity...'
+                      />
+                    </div>
+                    <div className='col-lg-12 mb-3'>
+                      <label for='reception_date' className='form-label'>
+                        Reception Date
+                      </label>
+                      <input
+                        type='date'
+                        className='form-control'
+                        {...register("reception_date")}
+                      />
+                    </div>
+                    <div className='mb-2 text-center'>
+                      <button
+                        className='btn btn-primary'
+                        onClick={() => {
+                          setInventoryShow(false);
+                        }}>
+                        Submit
+                      </button>
+                      &nbsp;&nbsp;
+                      <button
+                        type='button'
+                        className='btn btn-outline-primary'
+                        data-bs-dismiss='modal'
+                        onClick={() => {
+                          reset();
+                          hideModal();
+                        }}>
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </div>
-              <form className='px-3 ' onSubmit={handleSubmit(inventoryForm)}>
-                <div className='row'>
-                  <div className='col-lg-12 mb-2'>
-                    <label for='product_name' className='form-label'>
-                      Product
-                    </label>
-                    <select
-                      className={` form-select }`}
-                      {...register("product_id")}
-                      value={watch()?.product_id}>
-                      <option value='' className='option'>
-                        Select Product
-                      </option>
-                      {productData?.map((item, index) => {
-                        return (
-                          <option value={item?._id} key={index + 1}>
-                            {item?.name}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                  <div className='col-lg-6 mb-2'>
-                    <label for='order_price' className='form-label'>
-                      Total Order Price
-                    </label>
-                    <input
-                      type='number'
-                      {...register("total_price")}
-                      className='form-control'
-                      placeholder='Enter Total Order Price...'
-                    />
-                  </div>
-                  <div className='col-lg-6 mb-2'>
-                    <label for='order_qty' className='form-label'>
-                      Order Qty.
-                    </label>
-                    <input
-                      type='number'
-                      className='form-control'
-                      {...register("quantity")}
-                      placeholder='Enter Order Quantity...'
-                    />
-                  </div>
-                  <div className='col-lg-12 mb-3'>
-                    <label for='reception_date' className='form-label'>
-                      Reception Date
-                    </label>
-                    <input
-                      type='date'
-                      className='form-control'
-                      {...register("reception_date")}
-                    />
-                  </div>
-                  <div className='mb-2 text-center'>
-                    <button
-                      className='btn btn-primary'
-                      onClick={() => {
-                        setInventoryShow(false);
-                      }}>
-                      Submit
-                    </button>
-                    &nbsp;&nbsp;
-                    <button
-                      type='button'
-                      className='btn btn-outline-primary'
-                      data-bs-dismiss='modal'>
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              </form>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

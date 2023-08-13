@@ -36,6 +36,7 @@ const CreateProduct = () => {
       formData.append("sale_price", watch()?.sale_price);
       formData.append("capacity", watch()?.capacity);
       formData.append("factory_id", userData?.factory_id);
+      formData.append("product_tax", watch()?.product_tax);
       // Append images to formData
       // =====Event images
       if (eventImage?.length) {
@@ -115,6 +116,7 @@ const CreateProduct = () => {
         setValue("images", data?.data?.images);
         setValue("cost", data?.data?.cost);
         setValue("sale_price", data?.data?.sale_price);
+        setValue("product_tax", data?.data?.product_tax);
         setValue("capacity", data?.data?.capacity);
         setValue(data?.data);
       }
@@ -137,35 +139,6 @@ const CreateProduct = () => {
     };
     setRows(updatedRows);
   };
-
-  // const handleAddRow = () => {
-  //   const newItem = {
-  //     name: "",
-  //     mobile: "",
-  //   };
-  //   setRows([...rows, newItem]);
-  // };
-
-  // const handleRemoveRow = () => {
-  //   setRows(rows.slice(0, -1));
-  // };
-
-  // const handleRemoveSpecificRow = (idx) => () => {
-  //   const updatedRows = [...rows];
-  //   updatedRows.splice(idx, 1);
-  //   setRows(updatedRows);
-  // };
-
-  // const handleChange = (idx) => (e) => {
-  //   const { name, value } = e.target;
-  //   const updatedRows = [...rows];
-  //   updatedRows[idx] = {
-  //     ...updatedRows[idx],
-  //     [name]: value,
-  //   };
-  //   setRows(updatedRows);
-  // };
-
   const handleAddRow = () => {
     setRows([...rows, {}]);
   };
@@ -279,8 +252,9 @@ const CreateProduct = () => {
                                   className='form-control'
                                   {...field}
                                   placeholder='typehere'
-                                  defaultValue={editProduct?.description} // Set the defaultValue for the textarea here
-                                ></textarea>
+                                  defaultValue={{
+                                    value: editProduct?.description,
+                                  }}></textarea>
                               )}
                             />
                             {errors?.description && (
@@ -371,6 +345,7 @@ const CreateProduct = () => {
                               Cost Price <span className='text-danger'>*</span>
                             </label>
                             <input
+                              maxLength={15}
                               type='text'
                               onKeyPress={(offer) => {
                                 if (!/[0-9]/.test(offer.key)) {
@@ -422,6 +397,33 @@ const CreateProduct = () => {
                               {...register("capacity", { required: true })}
                               className='form-control capacity'
                               placeholder='Enter Capacity...'
+                            />
+                            {errors?.capacity?.type === "required" && (
+                              <p role='alert' className='alert-msg text-danger'>
+                                Capacity is required
+                              </p>
+                            )}
+                          </div>
+                          <div className='col-lg-4 mb-2'>
+                            <label>Tax</label>
+                            <input
+                              type='text'
+                              onKeyPress={(event) => {
+                                // Allow digits and a single decimal point
+                                if (!/[0-9.]/.test(event.key)) {
+                                  event.preventDefault();
+                                }
+                                // Prevent multiple decimal points
+                                if (
+                                  event.key === "." &&
+                                  event.target.value.includes(".")
+                                ) {
+                                  event.preventDefault();
+                                }
+                              }}
+                              {...register("product_tax")}
+                              className='form-control'
+                              placeholder='Enter Tax...'
                             />
                             {errors?.capacity?.type === "required" && (
                               <p role='alert' className='alert-msg text-danger'>
