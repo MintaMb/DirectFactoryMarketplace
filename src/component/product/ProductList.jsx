@@ -145,11 +145,19 @@ const ProductList = () => {
                                           &nbsp;&nbsp;
                                           {item?.name ? item?.name : "-"}
                                         </td>
-                                        <td>{item?.cost ? item?.cost : "-"}</td>
                                         <td>
-                                          {item?.sale_price
-                                            ? item?.sale_price
-                                            : "-"}
+                                          {/* {item?.cost}   */}
+                                          {typeof item?.cost === "string"
+                                            ? parseFloat(item?.cost).toFixed(1)
+                                            : "N/A"}
+                                        </td>
+                                        <td>
+                                          {/* { item?.sale_price} */}
+                                          {typeof item?.sale_price === "string"
+                                            ? parseFloat(
+                                                item.sale_price
+                                              ).toFixed(1)
+                                            : "N/A"}
                                         </td>
                                         <td>
                                           {item?.is_approved === true ? (

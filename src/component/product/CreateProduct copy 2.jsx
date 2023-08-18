@@ -44,52 +44,47 @@ const CreateProduct = () => {
         "product_tax",
         watch()?.product_tax ? watch()?.product_tax : "0"
       );
-
-      if (productImg) {
-        formData.append("image", productImg);
+      // Append images to formData
+      // =====Event images
+      if (eventImage?.length) {
+        eventImage?.forEach((itm, i) => {
+          if (typeof itm?.file === "object") {
+            formData.append(`image[${i}]`, itm?.file);
+          }
+        });
       }
       // Append variations data to formData
       if (rows.length > 0) {
-        const variations = rows.map((variation) => {
-          const variationObject = {};
-          if (variation.name != null && variation.name !== "") {
-            variationObject.name = variation.name;
-          }
-          if (variation.cost_price) {
-            variationObject.cost_price = variation.cost_price;
-          }
-          if (variation.sale_price) {
-            variationObject.sale_price = variation.sale_price;
-          }
-          if (variation.sku) {
-            variationObject.sku = variation.sku;
-          }
-          return variationObject;
-        });
-        const nonEmptyVariations = variations.filter((variation) => {
-          return (
-            variation.name ||
-            variation.cost_price ||
-            variation.sale_price ||
-            variation.sku
-          );
-        });
-        if (nonEmptyVariations.length > 0) {
-          // Append variations data to formData
-          formData.append("variations", JSON.stringify(nonEmptyVariations));
-        }
+        formData.append("variations", JSON.stringify(rows));
       }
       const apiUrl = id
         ? `${process.env.REACT_APP_BASE_URL}/api/update_product`
         : `${process.env.REACT_APP_BASE_URL}/api/add_product`;
-      const response = await fetch(apiUrl, {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${localStorage.getItem("Token")}`,
-        },
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        apiUrl,
+        // `${process.env.REACT_APP_BASE_URL}${id ? `/api/update_product` : `api/add_product`}`,
+        // `${process.env.REACT_APP_BASE_URL}/api/add_product`,
+        {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+            // "Content-Type":
+            //   "multipart/form-data; boundary=AaB03x" +
+            //   "--AaB03x" +
+            //   "Content-Disposition: file" +
+            //   "Content-Type: png" +
+            //   "Content-Transfer-Encoding: binary" +
+            //   "...data... " +
+            //   "--AaB03x--",
+            // type: "formData",
+          },
+          method: "POST",
+          body: formData,
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
       if (response?.status === 200) {
         reset();
         setEventImage([]);
@@ -150,10 +145,10 @@ const CreateProduct = () => {
         if (data?.data?.variations && data?.data?.variations.length > 0) {
           const variations = data?.data?.variations.map((variation) => ({
             // variation_id: variation_id,
-            name: variation.name ? variation.name : "",
-            cost_price: variation.cost_price ? variation.cost_price : "",
-            sale_price: variation.sale_price ? variation.sale_price : "",
-            sku: variation.sku ? variation.sku : "",
+            name: variation.name,
+            cost_price: variation.cost_price,
+            sale_price: variation.sale_price,
+            sku: variation.sku,
           }));
           setRows(variations);
         } else {
@@ -219,10 +214,10 @@ const CreateProduct = () => {
     }
   };
 
-  const [productImg, setproductImg] = useState(null);
+  const [businessLogo, setBusinessLogo] = useState(null);
   const handleLogoChange = (event) => {
     const selectedFile = event.target.files[0];
-    setproductImg(selectedFile);
+    setBusinessLogo(selectedFile);
   };
   return (
     <>
@@ -326,7 +321,7 @@ const CreateProduct = () => {
                           <div className='col-lg-4 mb-2'>
                             <label>
                               Upload Product Images{" "}
-                              {/* <span className='text-danger'>*</span> */}
+                              <span className='text-danger'>*</span>
                             </label>
                             {/* <Controller
                               name="images"
@@ -511,17 +506,7 @@ const CreateProduct = () => {
                                         name={`cost_price`}
                                         onChange={handleChange(idx)}
                                         value={item.cost_price || ""}
-                                        type='number'
-                                        min='1'
-                                        step='any'
-                                        onKeyDown={(event) => {
-                                          if (
-                                            event.key === "0" &&
-                                            event.target.value === ""
-                                          ) {
-                                            event.preventDefault();
-                                          }
-                                        }}
+                                        type='text'
                                         className='form-control variant_cost_price'
                                         placeholder='Enter Variant Cost Price...'
                                       />
@@ -531,17 +516,7 @@ const CreateProduct = () => {
                                         name={`sale_price`}
                                         onChange={handleChange(idx)}
                                         value={item.sale_price || ""}
-                                        type='number'
-                                        min='1'
-                                        step='any'
-                                        onKeyDown={(event) => {
-                                          if (
-                                            event.key === "0" &&
-                                            event.target.value === ""
-                                          ) {
-                                            event.preventDefault();
-                                          }
-                                        }}
+                                        type='text'
                                         className='form-control variant_sale_price'
                                         placeholder='Enter Variant Sale Price...'
                                       />

@@ -43,6 +43,9 @@ const CreateOrder = () => {
       variations = selectedProducts.map((product) => ({
         product_id: product._id,
         quantity: product.quantity ? product.quantity : "1",
+        product_price: product["sale_price"],
+        total_price: calculateSubtotal(),
+        currency: "",
       }));
     }
 
@@ -57,6 +60,7 @@ const CreateOrder = () => {
         total_order_price: calculateSubtotal(),
         gst: gstTax,
         discount,
+        product_price: data["sale_price"],
         shipping_charges: shippingCharge,
         grand_total: calculateTotal(),
         orderItems: JSON.stringify(variations),
@@ -357,7 +361,7 @@ const CreateOrder = () => {
                             </label>
 
                             <input
-                              {...register("address", { required: "" })}
+                              {...register("address")}
                               type='text'
                               className='form-control'
                               placeholder='Enter Customer Address...'
@@ -405,9 +409,17 @@ const CreateOrder = () => {
                                           <td>
                                             <input
                                               type='number'
+                                              min='1'
+                                              step='any'
+                                              onKeyDown={(event) => {
+                                                if (
+                                                  event.key === "0" &&
+                                                  event.target.value === ""
+                                                ) {
+                                                  event.preventDefault();
+                                                }
+                                              }}
                                               className='form-control'
-                                              min={1} // Minimum quantity value
-                                              max={9999} // Maximum quantity value
                                               defaultValue={1} // Set the default value to 1
                                               value={product.quantity}
                                               onChange={(e) => {
@@ -464,6 +476,16 @@ const CreateOrder = () => {
                                       <td>
                                         <input
                                           type='number'
+                                          min='1'
+                                          step='any'
+                                          onKeyDown={(event) => {
+                                            if (
+                                              event.key === "0" &&
+                                              event.target.value === ""
+                                            ) {
+                                              event.preventDefault();
+                                            }
+                                          }}
                                           value={gstTax}
                                           onChange={(e) =>
                                             setGstTax(
@@ -479,6 +501,16 @@ const CreateOrder = () => {
                                       <td>
                                         <input
                                           type='number'
+                                          min='1'
+                                          step='any'
+                                          onKeyDown={(event) => {
+                                            if (
+                                              event.key === "0" &&
+                                              event.target.value === ""
+                                            ) {
+                                              event.preventDefault();
+                                            }
+                                          }}
                                           value={discount}
                                           onChange={(e) =>
                                             setDiscount(
@@ -496,6 +528,16 @@ const CreateOrder = () => {
                                       <td>
                                         <input
                                           type='number'
+                                          min='1'
+                                          step='any'
+                                          onKeyDown={(event) => {
+                                            if (
+                                              event.key === "0" &&
+                                              event.target.value === ""
+                                            ) {
+                                              event.preventDefault();
+                                            }
+                                          }}
                                           value={shippingCharge}
                                           onChange={(e) =>
                                             setShippingCharge(
@@ -525,7 +567,15 @@ const CreateOrder = () => {
                                 </button>
                               </div>
                               <div className='col-lg-4'>
-                                <button className='btn btn-primary w-100'>
+                                <button
+                                  title={
+                                    selectedProducts?.length <= 0 &&
+                                    "Please select theh product "
+                                  }
+                                  className='btn btn-primary w-100'
+                                  disabled={
+                                    selectedProducts?.length <= 0 ? true : false
+                                  }>
                                   Confirm Order
                                 </button>
                               </div>

@@ -23,13 +23,13 @@ const User = () => {
     setShowModal(false);
   };
   const permissions = [
-    { name: "Inventory", value: "inventory" },
-    { name: "Order", value: "order" },
-    { name: "Message", value: "message" },
-    { name: "Loss Profit", value: "loss-profit" },
-    { name: "Add-Ons", value: "add-on" },
-    { name: "User", value: "user" },
-    { name: "Setting", value: "setting" },
+    { name: "Inventory", value: "Inventory" },
+    { name: "Order", value: "Order" },
+    { name: "Message", value: "Message" },
+    { name: "Loss Profit", value: "Loss Profit" },
+    { name: "Add-Ons", value: "Add-Ons" },
+    { name: "User", value: "User" },
+    { name: "Setting", value: "Setting" },
   ];
   const {
     register,

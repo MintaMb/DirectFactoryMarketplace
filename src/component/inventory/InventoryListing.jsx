@@ -24,6 +24,16 @@ const InventoryListing = () => {
     control,
     formState: { errors },
   } = useForm({ mode: "all" });
+
+  // modal show/Hide  functions
+  const [modalShow, setShowModal] = useState(false);
+  const showModal = () => {
+    setShowModal(true);
+  };
+
+  const hideModal = () => {
+    setShowModal(false);
+  };
   // ================== get list api
   const inventoryListing = async () => {
     let token = localStorage.getItem("Token");
@@ -52,7 +62,7 @@ const InventoryListing = () => {
     } catch (error) {
       setSpinner(false);
     }
-      setSpinner(false);
+    setSpinner(false);
   };
   useEffect(() => {
     inventoryListing();
@@ -92,53 +102,54 @@ const InventoryListing = () => {
   }, []);
   // ========== add inventory api
   const inventoryForm = async (data, id) => {
-  setSpinner(true)
-  try {
-    const formattedData = {
-      product_id: data.product_id,
-      reception_date: data.reception_date,
-      quantity: data.quantity,
-      total_price: data.total_price,
-    };
+    setSpinner(true);
+    try {
+      const formattedData = {
+        product_id: data.product_id,
+        reception_date: data.reception_date,
+        quantity: data.quantity,
+        total_price: data.total_price,
+      };
 
-    const response = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/api/add_stock_history`,
-      {
-        headers: {
-          "Content-Type": "application/json", // Set Content-Type header
-          Authorization: `Bearer ${localStorage.getItem("Token")}`,
-        },
-        method: "POST",
-        body: JSON.stringify(formattedData),
-      }
-    );
-
-    const responseData = await response.json(); // Always parse the response data as JSON
-
-    if (response.status === 200) {
-      reset(); // Define the reset() function
-      setTimeout(() => {
-        // You might want to do something here
-      }, 500);
-      setProduct(); // Define the setProduct() function
-      toast.success(
-        `${id ? "Stock Updated successfully" : "Stock created successfully"}`
+      const response = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/api/add_stock_history`,
+        {
+          headers: {
+            "Content-Type": "application/json", // Set Content-Type header
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+          },
+          method: "POST",
+          body: JSON.stringify(formattedData),
+        }
       );
-    } else if (response.status === 401) {
-      localStorage.clear();
-      toast.error(`Session expired !`);
-      navigate("/"); // Redirect to the login page
-    } else {
-      toast.error(responseData?.message || "An error occurred", {
-        autoClose: 5000,
-      });
+
+      const responseData = await response.json(); // Always parse the response data as JSON
+
+      if (response.status === 200) {
+        hideModal();
+        reset(); // Define the reset() function
+        setTimeout(() => {
+          // You might want to do something here
+        }, 500);
+        setProduct(); // Define the setProduct() function
+        toast.success(
+          `${id ? "Stock Updated successfully" : "Stock created successfully"}`
+        );
+      } else if (response.status === 401) {
+        localStorage.clear();
+        toast.error(`Session expired !`);
+        navigate("/"); // Redirect to the login page
+      } else {
+        toast.error(responseData?.message || "An error occurred", {
+          autoClose: 5000,
+        });
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      // Handle any additional error handling here
     }
-  } catch (error) {
-    console.error("An error occurred:", error);
-    // Handle any additional error handling here
-  }
-  setSpinner(false);
-};
+    setSpinner(false);
+  };
   useEffect(() => {
     if (prduct) {
       setValue("product_id", prduct._id);
@@ -151,43 +162,36 @@ const InventoryListing = () => {
   return (
     <>
       {spinner && <Spinner />}
-      <div id="wrapper" onClick={() => reset()}>
-        <div className="content-page">
-          <div className="content">
-            <div className="container-fluid">
-              {/* <div className="row">
-                <div className="col-12">
-                  <div className="page-title-box">
-                    <h4 className="page-title">Products List</h4>
-                  </div>
-                </div>
-              </div> */}
-              <div className="row mt-4">
-                <div className="col-lg-12">
-                  <div className="card">
-                    <div className="card-body">
-                      <div class="row">
-                        <div className="col-lg-8 mb-2">
+      <div id='wrapper'>
+        <div className='content-page'>
+          <div className='content'>
+            <div className='container-fluid'>
+              <div className='row mt-4'>
+                <div className='col-lg-12'>
+                  <div className='card'>
+                    <div className='card-body'>
+                      <div class='row'>
+                        <div className='col-lg-8 mb-2'>
                           <h5>Inventory</h5>
                         </div>
-                        <div className="col-lg-4 text-end mb-2">
+                        <div className='col-lg-4 text-end mb-2'>
                           <button
-                            className="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#order-model"
+                            className='btn btn-primary'
+                            type='button'
+                            onClick={showModal} // Changed from data-bs-toggle and data-bs-target
                           >
                             Add New Stock
                           </button>
-                          <button className="btn btn-primary mx-2">
+                          <button className='btn btn-primary mx-2'>
                             Print Report
                           </button>
                         </div>
-                        <div className="col-lg-12">
-                          <div className="table-responsive">
+                        <div className='col-lg-12'>
+                          <div className='table-responsive'>
                             {inventoryData?.length > 0 ? (
                               <>
-                                <table className="table dt-responsive nowrap w-100 dataTable dtr-inline border">
-                                  <thead className="bg-light">
+                                <table className='table dt-responsive nowrap w-100 dataTable dtr-inline border'>
+                                  <thead className='bg-light'>
                                     <tr>
                                       <th>SL</th>
                                       <th>Product Name</th>
@@ -211,16 +215,16 @@ const InventoryListing = () => {
                                               : "-"}
                                           </td>
                                           <td>{item?.stock}</td>
-                                          <td width="180px">
+                                          <td width='180px'>
                                             <button
-                                              className="btn btn-primary btn-sm"
-                                              data-bs-toggle="modal"
-                                              data-bs-target="#order-model"
+                                              className='btn btn-primary btn-sm'
+                                              // data-bs-toggle='modal'
+                                              // data-bs-target='#order-model'
                                               onClick={() => {
                                                 setInventoryShow(true);
                                                 setProduct(item);
-                                              }}
-                                            >
+                                                showModal();
+                                              }}>
                                               Order More
                                             </button>
                                           </td>
@@ -231,7 +235,7 @@ const InventoryListing = () => {
                                 </table>
                               </>
                             ) : (
-                              <NoData title="No product data.." />
+                              <NoData title='No product data..' />
                             )}
                           </div>
                         </div>
@@ -245,34 +249,31 @@ const InventoryListing = () => {
         </div>
       </div>
       <div
-        id="delete-alert-modal"
-        className="modal fade"
-        tabindex="-1"
-        role="dialog"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-sm">
-          <div className="modal-content modal-filled bg-danger">
-            <div className="modal-body p-4">
-              <div className="text-center">
-                <i className="mdi mdi-trash-can-outline h1 text-white"></i>
-                <h4 className="mt-2 text-white">Delete!</h4>
-                <p className="mt-3 text-white">
+        id='delete-alert-modal'
+        className='modal fade'
+        tabindex='-1'
+        role='dialog'
+        aria-hidden='true'>
+        <div className='modal-dialog modal-sm'>
+          <div className='modal-content modal-filled bg-danger'>
+            <div className='modal-body p-4'>
+              <div className='text-center'>
+                <i className='mdi mdi-trash-can-outline h1 text-white'></i>
+                <h4 className='mt-2 text-white'>Delete!</h4>
+                <p className='mt-3 text-white'>
                   Are you sure you want to delete this Product?
                 </p>
                 <button
-                  type="button"
-                  className="btn btn-light my-2"
-                  data-bs-dismiss="modal"
-                >
+                  type='button'
+                  className='btn btn-light my-2'
+                  data-bs-dismiss='modal'>
                   Confirm
                 </button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <button
-                  type="button"
-                  className="btn btn-danger border-white my-2"
-                  data-bs-dismiss="modal"
-                >
+                  type='button'
+                  className='btn btn-danger border-white my-2'
+                  data-bs-dismiss='modal'>
                   Cancel
                 </button>
               </div>
@@ -282,105 +283,128 @@ const InventoryListing = () => {
       </div>
 
       {/* ==== inventory modal */}
-      <div
-        id="order-model"
-        className="modal fade"
-        tabindex="-1"
-        role="dialog"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-body">
-              <div className="text-center mt-0 mb-2">
-                <div className="auth-logo">
-                  <h4 className="mt-4 text-primary text-start mb-0">
-                    Add New Stock
-                  </h4>
-                  <hr />
+      {modalShow && (
+        <div
+          id='create-customer-model'
+          className={`modal ${modalShow ? "d-flex show-modal" : ""} `}
+          tabindex='-1'
+          role='dialog'
+          aria-hidden='true'>
+          <div className='modal-dialog'>
+            <div className='modal-content'>
+              <div className='modal-body'>
+                <div className='text-center mt-0 mb-2'>
+                  <div className='auth-logo'>
+                    <h4 className='mt-4 text-primary text-start mb-0'>
+                      Add New Stock
+                    </h4>
+                    <hr />
+                  </div>
                 </div>
+                <form className='px-3 ' onSubmit={handleSubmit(inventoryForm)}>
+                  <div className='row'>
+                    <div className='col-lg-12 mb-2'>
+                      <label for='product_name' className='form-label'>
+                        Product
+                        <span className='text-danger'>*</span>
+                      </label>
+                      <select
+                        className={` form-select }`}
+                        {...register("product_id", { required: true })}
+                        value={watch()?.product_id}>
+                        <option value='' className='option'>
+                          Select Product
+                        </option>
+                        {productData?.map((item, index) => {
+                          return (
+                            <option value={item?._id} key={index + 1}>
+                              {item?.name}
+                            </option>
+                          );
+                        })}
+                      </select>
+                      {errors?.product_id?.type === "required" && (
+                        <p role='alert' className='alert-msg text-danger mb-0'>
+                          required
+                        </p>
+                      )}
+                    </div>
+                    <div className='col-lg-6 mb-2'>
+                      <label for='order_price' className='form-label'>
+                        Total Order Price
+                        <span className='text-danger'>*</span>
+                      </label>
+                      <input
+                        type='number'
+                        {...register("total_price", { required: true })}
+                        className='form-control'
+                        placeholder='Enter Total Order Price...'
+                      />
+                      {errors?.total_price?.type === "required" && (
+                        <p role='alert' className='alert-msg text-danger mb-0'>
+                          required
+                        </p>
+                      )}
+                    </div>
+                    <div className='col-lg-6 mb-2'>
+                      <label for='order_qty' className='form-label'>
+                        Order Qty.
+                        <span className='text-danger'>*</span>
+                      </label>
+                      <input
+                        type='number'
+                        className='form-control'
+                        {...register("quantity", { required: true })}
+                        placeholder='Enter Order Quantity...'
+                      />
+                      {errors?.quantity?.type === "required" && (
+                        <p role='alert' className='alert-msg text-danger mb-0'>
+                          required
+                        </p>
+                      )}
+                    </div>
+                    <div className='col-lg-12 mb-3'>
+                      <label for='reception_date' className='form-label'>
+                        Reception Date
+                        <span className='text-danger'>*</span>
+                      </label>
+                      <input
+                        type='date'
+                        className='form-control'
+                        {...register("reception_date", { required: true })}
+                      />
+                      {errors?.reception_date?.type === "required" && (
+                        <p role='alert' className='alert-msg text-danger mb-0'>
+                          required
+                        </p>
+                      )}
+                    </div>
+                    <div className='mb-2 text-center'>
+                      <button
+                        className='btn btn-primary'
+                        onClick={() => {
+                          setInventoryShow(false);
+                        }}>
+                        Submit
+                      </button>
+                      &nbsp;&nbsp;
+                      <button
+                        type='button'
+                        className='btn btn-outline-primary'
+                        data-bs-dismiss='modal'
+                        onClick={() => {
+                          hideModal();
+                        }}>
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </div>
-              <form className="px-3 " onSubmit={handleSubmit(inventoryForm)}>
-                <div className="row">
-                  <div className="col-lg-12 mb-2">
-                    <label for="product_name" className="form-label">
-                      Product
-                    </label>
-                    <select
-                      className={` form-select }`}
-                      {...register("product_id")}
-                      value={watch()?.product_id}
-                    >
-                      <option value="" className="option">
-                        Select Product
-                      </option>
-                      {productData?.map((item, index) => {
-                        return (
-                          <option value={item?._id} key={index + 1}>
-                            {item?.name}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                  <div className="col-lg-6 mb-2">
-                    <label for="order_price" className="form-label">
-                      Total Order Price
-                    </label>
-                    <input
-                      type="number"
-                      {...register("total_price")}
-                      // value={prduct?.total_price || ""}
-                      className="form-control"
-                      placeholder="Enter Total Order Price..."
-                    />
-                  </div>
-                  <div className="col-lg-6 mb-2">
-                    <label for="order_qty" className="form-label">
-                      Order Qty.
-                    </label>
-                    <input
-                      type="number"
-                      className="form-control"
-                      {...register("quantity")}
-                      placeholder="Enter Order Quantity..."
-                    />
-                  </div>
-                  <div className="col-lg-12 mb-3">
-                    <label for="reception_date" className="form-label">
-                      Reception Date
-                    </label>
-                    <input
-                      type="date"
-                      className="form-control"
-                      {...register("reception_date")}
-                    />
-                  </div>
-                  <div className="mb-2 text-center">
-                    <button
-                      className="btn btn-primary"
-                      onClick={() => {
-                        setInventoryShow(false);
-                      }}
-                    >
-                      Submit
-                    </button>
-                    &nbsp;&nbsp;
-                    <button
-                      type="button"
-                      className="btn btn-outline-primary"
-                      data-bs-dismiss="modal"
-                      // onClick={id ? "" : () => reset()}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              </form>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

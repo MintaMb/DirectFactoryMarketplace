@@ -15,7 +15,14 @@ const Inventory = () => {
   const [prduct, setProduct] = useState();
   const [deleteShow, setDShow] = useState(false);
   const [inventoryShow, setInventoryShow] = useState(false);
-  const { register, watch, handleSubmit, reset, setValue } = useForm({
+  const {
+    register,
+    watch,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm({
     mode: "all",
   });
 
@@ -118,6 +125,7 @@ const Inventory = () => {
       const responseData = await response.json(); // Always parse the response data as JSON
       if (response.status === 200) {
         reset(); // Define the reset() function
+        inventoryListing();
         hideModal();
         setTimeout(() => {
           // You might want to do something here
@@ -254,13 +262,30 @@ const Inventory = () => {
                                               &nbsp;&nbsp;
                                               {item?.name ? item?.name : "-"}
                                             </td>
-                                            <td>
+                                            {/* <td>
                                               {item?.cost ? item?.cost : "-"}
                                             </td>
                                             <td>
                                               {item?.sale_price
                                                 ? item?.sale_price
                                                 : "-"}
+                                            </td> */}
+                                            <td>
+                                              {/* {item?.cost}   */}
+                                              {typeof item?.cost === "string"
+                                                ? parseFloat(
+                                                    item?.cost
+                                                  ).toFixed(1)
+                                                : "N/A"}
+                                            </td>
+                                            <td>
+                                              {/* { item?.sale_price} */}
+                                              {typeof item?.sale_price ===
+                                              "string"
+                                                ? parseFloat(
+                                                    item.sale_price
+                                                  ).toFixed(1)
+                                                : "N/A"}
                                             </td>
                                             <td>
                                               {item?.is_approved === true ? (
@@ -583,10 +608,11 @@ const Inventory = () => {
                     <div className='col-lg-12 mb-2'>
                       <label for='product_name' className='form-label'>
                         Product
+                        <span className='text-danger'>*</span>
                       </label>
                       <select
                         className={` form-select }`}
-                        {...register("product_id")}
+                        {...register("product_id", { required: true })}
                         value={watch()?.product_id}>
                         <option value='' className='option'>
                           Select Product
@@ -599,38 +625,61 @@ const Inventory = () => {
                           );
                         })}
                       </select>
+                      {errors?.product_id?.type === "required" && (
+                        <p role='alert' className='alert-msg text-danger mb-0'>
+                          required
+                        </p>
+                      )}
                     </div>
                     <div className='col-lg-6 mb-2'>
                       <label for='order_price' className='form-label'>
                         Total Order Price
+                        <span className='text-danger'>*</span>
                       </label>
                       <input
                         type='number'
-                        {...register("total_price")}
+                        {...register("total_price", { required: true })}
                         className='form-control'
                         placeholder='Enter Total Order Price...'
                       />
+                      {errors?.total_price?.type === "required" && (
+                        <p role='alert' className='alert-msg text-danger mb-0'>
+                          required
+                        </p>
+                      )}
                     </div>
                     <div className='col-lg-6 mb-2'>
                       <label for='order_qty' className='form-label'>
                         Order Qty.
+                        <span className='text-danger'>*</span>
                       </label>
                       <input
                         type='number'
                         className='form-control'
-                        {...register("quantity")}
+                        {...register("quantity", { required: true })}
                         placeholder='Enter Order Quantity...'
                       />
+                      {errors?.quantity?.type === "required" && (
+                        <p role='alert' className='alert-msg text-danger mb-0'>
+                          required
+                        </p>
+                      )}
                     </div>
                     <div className='col-lg-12 mb-3'>
                       <label for='reception_date' className='form-label'>
                         Reception Date
+                        <span className='text-danger'>*</span>
                       </label>
                       <input
                         type='date'
                         className='form-control'
-                        {...register("reception_date")}
+                        {...register("reception_date", { required: true })}
                       />
+                      {errors?.reception_date?.type === "required" && (
+                        <p role='alert' className='alert-msg text-danger mb-0'>
+                          required
+                        </p>
+                      )}
                     </div>
                     <div className='mb-2 text-center'>
                       <button
@@ -646,7 +695,6 @@ const Inventory = () => {
                         className='btn btn-outline-primary'
                         data-bs-dismiss='modal'
                         onClick={() => {
-                          reset();
                           hideModal();
                         }}>
                         Cancel

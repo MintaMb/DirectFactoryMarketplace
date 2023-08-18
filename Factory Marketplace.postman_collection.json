@@ -17,7 +17,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCIsImxhc3RfbmFtZSI6IlNhaHUiLCJwaG9uZSI6Ijk4Nzg0ODE4OTAiLCJlbWFpbCI6InBhcmRlZXBzYWh1Lm5leGV2ZXJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJkYWljaGkiLCJwYXNzd29yZCI6IiQyYSQwOCRyMkczZkpqazBPdGVVYVdUWUprYTZlNFFKaThDQkRaVS84Rnh6LkgxdVlHWC94aHpQeUZsYSIsImlzX2VtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZW1haWxfdmVyaWZpZWRfYXQiOm51bGwsImlzX3RyYXNoIjpmYWxzZSwiaXNfYWN0aXZlIjp0cnVlLCJjb21wYW55X2lkIjoiMSIsImZhY3RvcnlfaWQiOiIxMDAwMSIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTE5VDEzOjAyOjA3LjY4NloiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wNy0xOVQxMzowMjowNy42ODdaIiwiX192IjowLCJpYXQiOjE2OTE4NDk5NDl9.SVBKmaWdi-R69v6PebZNAqCvwpI5_uywpOdUhMpdlKc",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCAiLCJsYXN0X25hbWUiOiJTYWh1IiwicGhvbmUiOiI5ODc4NDgxODkwIiwiZW1haWwiOiJwYXJkZWVwc2FodS5uZXhldmVyQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiZGFpY2hpIiwicGFzc3dvcmQiOiIkMmEkMDgkeTlWb0UvM3FvLjRwam9LOTRRZzBiLlIyODBBSEF6aEp4SWxsd3BNOHNsZXpya0o4ZXFMN20iLCJpc19lbWFpbF92ZXJpZmllZCI6ZmFsc2UsImVtYWlsX3ZlcmlmaWVkX2F0IjpudWxsLCJpc190cmFzaCI6ZmFsc2UsImlzX2FjdGl2ZSI6dHJ1ZSwiY29tcGFueV9pZCI6IjY0YjM4ZDQ1M2M1ZDllNDE0M2E5NWIwZSIsImZhY3RvcnlfaWQiOiIxMDAwMSIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTE5VDEzOjAyOjA3LjY4NloiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wOC0xM1QxNDozMDo1OS4wNzZaIiwiX192IjowLCJpYXQiOjE2OTE5MzcwNzZ9.9MXv6Rub0yAOEv_vU0yDIJmf_VxPjWVYBXFaHi2PvgQ",
 									"type": "string"
 								}
 							]
@@ -25,11 +25,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://kayhancodestore.online:3004/admin/all_services",
+							"raw": "http://localhost:3004/admin/all_services",
 							"protocol": "http",
 							"host": [
-								"kayhancodestore",
-								"online"
+								"localhost"
 							],
 							"port": "3004",
 							"path": [
@@ -407,7 +406,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"first_name\": \"Jitendra Sahu\",\r\n    \"email\": \"jitendrasahu1989@yopmail.com\",\r\n    \"phone\": \"9803214697\",\r\n    \"password\": \"123456\",\r\n    \"permissions\": \"[\\\"inventory\\\",\\\"loss profit\\\",\\\"add-Ons\\\"]\"\r\n}",
+							"raw": "{\r\n    \"first_name\": \"Jitendra Sahu\",\r\n    \"email\": \"jitendrasahu1989@yopmail.com\",\r\n    \"phone\": \"9803214697\",\r\n    \"password\": \"123456\",\r\n    \"user_type\": \"client\",\r\n    \"permissions\": \"[\\\"inventory\\\",\\\"loss profit\\\",\\\"add-Ons\\\"]\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -569,7 +568,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQ2OTgyZGFjY2E3ZDVhMjAxOWE2MjIiLCJ1c2VyX3NlcXVlbmNlIjo0LCJmaXJzdF9uYW1lIjoiUmFqdSIsImxhc3RfbmFtZSI6IkNoYWNoYSIsInBob25lIjoiODM2MDcxODk1OSIsImVtYWlsIjoicmFqdWNoYWNoYTQyMEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJhanVfY2hhY2hhIiwicGFzc3dvcmQiOiIkMmEkMDgkVzJSRExjMWwySnVuQXBNaENKZERaT3EyZk4ubXk1RUpES2JpQWNPbEN0dlZyeWJSQ0dBaFMiLCJpc19lbWFpbF92ZXJpZmllZCI6ZmFsc2UsImVtYWlsX3ZlcmlmaWVkX2F0IjpudWxsLCJvdHAiOm51bGwsIm90cF90aW1lc3RhbXAiOm51bGwsIm90cF9mbGFnIjowLCJpc190cmFzaCI6ZmFsc2UsImlzX2FjdGl2ZSI6dHJ1ZSwiY29tcGFueV9pZCI6IjY0ZDY3ZmQ1MmRlMzQ1M2M4NTc3NDhhMyIsImZhY3RvcnlfaWQiOiIxMDAwNCIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYnkiOm51bGwsInVwZGF0ZWRfYXQiOm51bGwsImNyZWF0ZWRfYXQiOiIyMDIzLTA4LTExVDIwOjIxOjAxLjY0MVoiLCJfX3YiOjAsImlhdCI6MTY5MTc4NTI4Nn0.uPXy7o9vVRAo5T5r4jWT26QxmftnNG-0iKjvobhEEuo",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCAiLCJsYXN0X25hbWUiOiJTYWh1IiwicGhvbmUiOiI5ODc4NDgxODkwIiwiZW1haWwiOiJwYXJkZWVwc2FodS5uZXhldmVyQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiZGFpY2hpIiwicGFzc3dvcmQiOiIkMmEkMDgkeTlWb0UvM3FvLjRwam9LOTRRZzBiLlIyODBBSEF6aEp4SWxsd3BNOHNsZXpya0o4ZXFMN20iLCJpc19lbWFpbF92ZXJpZmllZCI6ZmFsc2UsImVtYWlsX3ZlcmlmaWVkX2F0IjpudWxsLCJpc190cmFzaCI6ZmFsc2UsImlzX2FjdGl2ZSI6dHJ1ZSwiY29tcGFueV9pZCI6IjY0YjM4ZDQ1M2M1ZDllNDE0M2E5NWIwZSIsImZhY3RvcnlfaWQiOiIxMDAwMSIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTE5VDEzOjAyOjA3LjY4NloiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wOC0xM1QxNDozMDo1OS4wNzZaIiwiX192IjowLCJpYXQiOjE2OTIxMjExMTB9.R7EU36ejYIIPEbgmiVG-b-0nZxCBr7Lcj_89qgkGTnw",
 									"type": "string"
 								}
 							]
@@ -616,7 +615,7 @@
 								},
 								{
 									"key": "variations",
-									"value": "[{\"name\":\"Safari Coat\",\"cost_price\":\"2000\",\"sale_price\":\"1800\",\"stock\":\"100\"}]",
+									"value": "[{\"name\":\"Safari Coat\",\"cost_price\":\"2000\",\"sale_price\":\"1800\",\"sku\":\"SKU20027\"}]",
 									"type": "text"
 								},
 								{
@@ -631,7 +630,7 @@
 								},
 								{
 									"key": "factory_id",
-									"value": "10004",
+									"value": "10001",
 									"type": "text"
 								},
 								{
@@ -669,7 +668,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCB1cGRhdGVkIiwibGFzdF9uYW1lIjoiU2FodSIsInBob25lIjoiOTg3ODQ4MTg5MCIsImVtYWlsIjoicGFyZGVlcHNhaHUubmV4ZXZlckBnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImRhaWNoaSIsInBhc3N3b3JkIjoiJDJhJDA4JHIyRzNmSmprME90ZVVhV1RZSmthNmU0UUppOENCRFpVLzhGeHouSDF1WUdYL3hoelB5RmxhIiwiaXNfZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJlbWFpbF92ZXJpZmllZF9hdCI6bnVsbCwiaXNfdHJhc2giOmZhbHNlLCJpc19hY3RpdmUiOnRydWUsImNvbXBhbnlfaWQiOiIxIiwiZmFjdG9yeV9pZCI6IjEwMDAxIiwidXNlcl90eXBlIjoiY2xpZW50IiwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMTlUMTM6MDI6MDcuNjg2WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA4LTA2VDE4OjIwOjQ1LjcyNVoiLCJfX3YiOjAsImlhdCI6MTY5MTg0MDA2OH0.Xjsc6TJWZYEkscgFKQojIbjPF_RF0bDfX0DV0xVIJ48",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGUiLCJsYXN0X25hbWUiOiJTYWgiLCJwaG9uZSI6Ijk4Nzg0ODE4OTAiLCJlbWFpbCI6InBhcmRlZXBzYWh1Lm5leGV2ZXJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJkYWljaGkiLCJwYXNzd29yZCI6IiQyYSQwOCQzZUNvODJYaWpWWjNabDR3TXFaWER1MnNTL1o0V1BUZ3ZMWjNCcGxJVHZDMFlEeEdQb3g2bSIsImlzX2VtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZW1haWxfdmVyaWZpZWRfYXQiOm51bGwsImlzX3RyYXNoIjpmYWxzZSwiaXNfYWN0aXZlIjp0cnVlLCJjb21wYW55X2lkIjoiNjRiMzhkNDUzYzVkOWU0MTQzYTk1YjBlIiwiZmFjdG9yeV9pZCI6IjEwMDAxIiwidXNlcl90eXBlIjoiY2xpZW50IiwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMTlUMTM6MDI6MDcuNjg2WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA4LTE0VDEwOjQ2OjE3LjQ0NVoiLCJfX3YiOjAsImlhdCI6MTY5MjAxMDA1Nn0.aNG1f-OvnQG5uRfsXyiMITG8YMxSWz4clpJPrfUncUg",
 									"type": "string"
 								}
 							]
@@ -677,10 +676,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3004/api/all_products",
+							"raw": "http://kayhancodestore.online:3004/api/all_products",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"kayhancodestore",
+								"online"
 							],
 							"port": "3004",
 							"path": [
@@ -906,7 +906,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCIsImxhc3RfbmFtZSI6IlNhaHUiLCJwaG9uZSI6Ijk4Nzg0ODE4OTAiLCJlbWFpbCI6InBhcmRlZXBzYWh1Lm5leGV2ZXJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJkYWljaGkiLCJwYXNzd29yZCI6IiQyYSQwOCRyMkczZkpqazBPdGVVYVdUWUprYTZlNFFKaThDQkRaVS84Rnh6LkgxdVlHWC94aHpQeUZsYSIsImlzX2VtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZW1haWxfdmVyaWZpZWRfYXQiOm51bGwsImlzX3RyYXNoIjpmYWxzZSwiaXNfYWN0aXZlIjp0cnVlLCJjb21wYW55X2lkIjoiMSIsImZhY3RvcnlfaWQiOiIxIiwidXNlcl90eXBlIjoiY2xpZW50IiwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMTlUMTM6MDI6MDcuNjg2WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA3LTE5VDEzOjAyOjA3LjY4N1oiLCJfX3YiOjAsImlhdCI6MTY5MTI2MzEyOX0.HlRn3DSz_o44QNXA0X_0Z0zK7cUYpOwIw62Oivv2-As",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGUiLCJsYXN0X25hbWUiOiJTYWgiLCJwaG9uZSI6Ijk4Nzg0ODE4OTAiLCJlbWFpbCI6InBhcmRlZXBzYWh1Lm5leGV2ZXJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJkYWljaGkiLCJwYXNzd29yZCI6IiQyYSQwOCQzZUNvODJYaWpWWjNabDR3TXFaWER1MnNTL1o0V1BUZ3ZMWjNCcGxJVHZDMFlEeEdQb3g2bSIsImlzX2VtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZW1haWxfdmVyaWZpZWRfYXQiOm51bGwsImlzX3RyYXNoIjpmYWxzZSwiaXNfYWN0aXZlIjp0cnVlLCJjb21wYW55X2lkIjoiNjRiMzhkNDUzYzVkOWU0MTQzYTk1YjBlIiwiZmFjdG9yeV9pZCI6IjEwMDAxIiwidXNlcl90eXBlIjoiY2xpZW50IiwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMTlUMTM6MDI6MDcuNjg2WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA4LTE0VDEwOjQ2OjE3LjQ0NVoiLCJfX3YiOjAsImlhdCI6MTY5MjAxMDA1Nn0.aNG1f-OvnQG5uRfsXyiMITG8YMxSWz4clpJPrfUncUg",
 									"type": "string"
 								}
 							]
@@ -914,10 +914,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3004/api/get_all_inventory",
+							"raw": "http://kayhancodestore.online:3004/api/get_all_inventory",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"kayhancodestore",
+								"online"
 							],
 							"port": "3004",
 							"path": [
@@ -936,7 +937,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGE1YTQyNTUzZDdiZjE2YzgxZmQwZTYiLCJmaXJzdF9uYW1lIjoiTXVrZXNoIEt1bWFyIiwibGFzdF9uYW1lIjoiZmFsc2UiLCJwaG9uZSI6Ijg5NTY4NTI1OTkiLCJlbWFpbCI6Im11a2VzaF9rdW1hcjAxMkBnbWFpbC5jb20iLCJ1c2VybmFtZSI6Im11a2VzaGt1bWFyIiwicGFzc3dvcmQiOiIkMmEkMDgkYVlib1BuclozWkRBYmVDN1ppLzk5ZVAzeWhJZzY4ME1wR25wU2tpWWZZVHpaV3hJdVR4eC4iLCJpc19lbWFpbF92ZXJpZmllZCI6ZmFsc2UsImlzX3RyYXNoIjpmYWxzZSwiaXNfYWN0aXZlIjpmYWxzZSwiY29tcGFueV9pZCI6IjEiLCJmYWN0b3J5X2lkIjoiMiIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTA1VDE3OjExOjAxLjIxMVoiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wNy0xMlQxNjo1NzowOS43NjBaIiwiX192IjowLCJpYXQiOjE2ODk1MDMxNDd9.KXvZR-0RNf43cgoG6cl2v4mOSo7erGKoIryVGwRnIM0",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCAiLCJsYXN0X25hbWUiOiJTYWh1IiwicGhvbmUiOiI5ODc4NDgxODkwIiwiZW1haWwiOiJwYXJkZWVwc2FodS5uZXhldmVyQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiZGFpY2hpIiwicGFzc3dvcmQiOiIkMmEkMDgkeTlWb0UvM3FvLjRwam9LOTRRZzBiLlIyODBBSEF6aEp4SWxsd3BNOHNsZXpya0o4ZXFMN20iLCJpc19lbWFpbF92ZXJpZmllZCI6ZmFsc2UsImVtYWlsX3ZlcmlmaWVkX2F0IjpudWxsLCJpc190cmFzaCI6ZmFsc2UsImlzX2FjdGl2ZSI6dHJ1ZSwiY29tcGFueV9pZCI6IjY0YjM4ZDQ1M2M1ZDllNDE0M2E5NWIwZSIsImZhY3RvcnlfaWQiOiIxMDAwMSIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTE5VDEzOjAyOjA3LjY4NloiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wOC0xM1QxNDozMDo1OS4wNzZaIiwiX192IjowLCJpYXQiOjE2OTE5MzcwNzZ9.9MXv6Rub0yAOEv_vU0yDIJmf_VxPjWVYBXFaHi2PvgQ",
 									"type": "string"
 								}
 							]
@@ -945,7 +946,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"client_id\": \"64b38d453c5d9e4143a95b0e\",\r\n    \"factory_id\": \"1001\",\r\n    \"services\": \"[{\\\"service_id\\\": \\\"64b27a038c21d6f0214614c4\\\", \\\"offer_price\\\": \\\"180\\\"}, {\\\"service_id\\\": \\\"64b27a2f8c21d6f0214614c8\\\", \\\"offer_price\\\": \\\"180\\\"}]\"\r\n\r\n}",
+							"raw": "{\r\n    \"client_id\": \"64b38d453c5d9e4143a95b0e\",\r\n    \"factory_id\": \"10001\",\r\n    \"services\": \"[{\\\"service_id\\\": \\\"64b27bf18c21d6f021461508\\\", \\\"offer_price\\\": \\\"180\\\"}, {\\\"service_id\\\": \\\"64b27b478c21d6f0214614f0\\\", \\\"offer_price\\\": \\\"180\\\"}]\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -975,7 +976,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGE1YTQyNTUzZDdiZjE2YzgxZmQwZTYiLCJmaXJzdF9uYW1lIjoiTXVrZXNoIEt1bWFyIiwibGFzdF9uYW1lIjoiZmFsc2UiLCJwaG9uZSI6Ijg5NTY4NTI1OTkiLCJlbWFpbCI6Im11a2VzaF9rdW1hcjAxMkBnbWFpbC5jb20iLCJ1c2VybmFtZSI6Im11a2VzaGt1bWFyIiwicGFzc3dvcmQiOiIkMmEkMDgkYVlib1BuclozWkRBYmVDN1ppLzk5ZVAzeWhJZzY4ME1wR25wU2tpWWZZVHpaV3hJdVR4eC4iLCJpc19lbWFpbF92ZXJpZmllZCI6ZmFsc2UsImlzX3RyYXNoIjpmYWxzZSwiaXNfYWN0aXZlIjpmYWxzZSwiY29tcGFueV9pZCI6IjEiLCJmYWN0b3J5X2lkIjoiMiIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTA1VDE3OjExOjAxLjIxMVoiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wNy0xMlQxNjo1NzowOS43NjBaIiwiX192IjowLCJpYXQiOjE2ODk1MDMxNDd9.KXvZR-0RNf43cgoG6cl2v4mOSo7erGKoIryVGwRnIM0",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCAiLCJsYXN0X25hbWUiOiJTYWh1IiwicGhvbmUiOiI5ODc4NDgxODkwIiwiZW1haWwiOiJwYXJkZWVwc2FodS5uZXhldmVyQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiZGFpY2hpIiwicGFzc3dvcmQiOiIkMmEkMDgkeTlWb0UvM3FvLjRwam9LOTRRZzBiLlIyODBBSEF6aEp4SWxsd3BNOHNsZXpya0o4ZXFMN20iLCJpc19lbWFpbF92ZXJpZmllZCI6ZmFsc2UsImVtYWlsX3ZlcmlmaWVkX2F0IjpudWxsLCJpc190cmFzaCI6ZmFsc2UsImlzX2FjdGl2ZSI6dHJ1ZSwiY29tcGFueV9pZCI6IjY0YjM4ZDQ1M2M1ZDllNDE0M2E5NWIwZSIsImZhY3RvcnlfaWQiOiIxMDAwMSIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTE5VDEzOjAyOjA3LjY4NloiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wOC0xM1QxNDozMDo1OS4wNzZaIiwiX192IjowLCJpYXQiOjE2OTE5MzcwNzZ9.9MXv6Rub0yAOEv_vU0yDIJmf_VxPjWVYBXFaHi2PvgQ",
 									"type": "string"
 								}
 							]
@@ -1014,7 +1015,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGE1YTQyNTUzZDdiZjE2YzgxZmQwZTYiLCJmaXJzdF9uYW1lIjoiTXVrZXNoIEt1bWFyIiwibGFzdF9uYW1lIjoiZmFsc2UiLCJwaG9uZSI6Ijg5NTY4NTI1OTkiLCJlbWFpbCI6Im11a2VzaF9rdW1hcjAxMkBnbWFpbC5jb20iLCJ1c2VybmFtZSI6Im11a2VzaGt1bWFyIiwicGFzc3dvcmQiOiIkMmEkMDgkYVlib1BuclozWkRBYmVDN1ppLzk5ZVAzeWhJZzY4ME1wR25wU2tpWWZZVHpaV3hJdVR4eC4iLCJpc19lbWFpbF92ZXJpZmllZCI6ZmFsc2UsImlzX3RyYXNoIjpmYWxzZSwiaXNfYWN0aXZlIjpmYWxzZSwiY29tcGFueV9pZCI6IjEiLCJmYWN0b3J5X2lkIjoiMiIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTA1VDE3OjExOjAxLjIxMVoiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wNy0xMlQxNjo1NzowOS43NjBaIiwiX192IjowLCJpYXQiOjE2ODk1MDMxNDd9.KXvZR-0RNf43cgoG6cl2v4mOSo7erGKoIryVGwRnIM0",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCAiLCJsYXN0X25hbWUiOiJTYWh1IiwicGhvbmUiOiI5ODc4NDgxODkwIiwiZW1haWwiOiJwYXJkZWVwc2FodS5uZXhldmVyQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiZGFpY2hpIiwicGFzc3dvcmQiOiIkMmEkMDgkcG5KSXc5TmZrd2N2MjhTRFROcGhaZUpwUTRNUFRDWmJsY1FleDBmMWdGaGVvUngyT21yWU8iLCJpc19lbWFpbF92ZXJpZmllZCI6ZmFsc2UsImVtYWlsX3ZlcmlmaWVkX2F0IjpudWxsLCJpc190cmFzaCI6ZmFsc2UsImlzX2FjdGl2ZSI6dHJ1ZSwiY29tcGFueV9pZCI6IjY0YjM4ZDQ1M2M1ZDllNDE0M2E5NWIwZSIsImZhY3RvcnlfaWQiOiIxMDAwMSIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTE5VDEzOjAyOjA3LjY4NloiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wOC0xM1QxNDoyOToxMy40NDBaIiwiX192IjowLCJpYXQiOjE2OTE5NDAyNTJ9.QmK_I4ok9yXWsW9_wBlY0NlTYv5I3AE50-zvdcGEjUg",
 									"type": "string"
 								}
 							]
@@ -1031,10 +1032,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3004/api/client_all_purchased_services_history",
+							"raw": "http://kayhancodestore.online:3004/api/client_all_purchased_services_history",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"kayhancodestore",
+								"online"
 							],
 							"port": "3004",
 							"path": [
@@ -1053,7 +1055,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGE1YTQyNTUzZDdiZjE2YzgxZmQwZTYiLCJmaXJzdF9uYW1lIjoiTXVrZXNoIEt1bWFyIiwibGFzdF9uYW1lIjoiZmFsc2UiLCJwaG9uZSI6Ijg5NTY4NTI1OTkiLCJlbWFpbCI6Im11a2VzaF9rdW1hcjAxMkBnbWFpbC5jb20iLCJ1c2VybmFtZSI6Im11a2VzaGt1bWFyIiwicGFzc3dvcmQiOiIkMmEkMDgkYVlib1BuclozWkRBYmVDN1ppLzk5ZVAzeWhJZzY4ME1wR25wU2tpWWZZVHpaV3hJdVR4eC4iLCJpc19lbWFpbF92ZXJpZmllZCI6ZmFsc2UsImlzX3RyYXNoIjpmYWxzZSwiaXNfYWN0aXZlIjpmYWxzZSwiY29tcGFueV9pZCI6IjEiLCJmYWN0b3J5X2lkIjoiMiIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTA1VDE3OjExOjAxLjIxMVoiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wNy0xMlQxNjo1NzowOS43NjBaIiwiX192IjowLCJpYXQiOjE2ODk2OTk2NTN9.kSHzcOcXh0yWsPdVo-Z98YLwJuDqVNjPSwkZ9uHHQrY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCAiLCJsYXN0X25hbWUiOiJTYWh1IiwicGhvbmUiOiI5ODc4NDgxODkwIiwiZW1haWwiOiJwYXJkZWVwc2FodS5uZXhldmVyQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiZGFpY2hpIiwicGFzc3dvcmQiOiIkMmEkMDgkcG5KSXc5TmZrd2N2MjhTRFROcGhaZUpwUTRNUFRDWmJsY1FleDBmMWdGaGVvUngyT21yWU8iLCJpc19lbWFpbF92ZXJpZmllZCI6ZmFsc2UsImVtYWlsX3ZlcmlmaWVkX2F0IjpudWxsLCJpc190cmFzaCI6ZmFsc2UsImlzX2FjdGl2ZSI6dHJ1ZSwiY29tcGFueV9pZCI6IjY0YjM4ZDQ1M2M1ZDllNDE0M2E5NWIwZSIsImZhY3RvcnlfaWQiOiIxMDAwMSIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTE5VDEzOjAyOjA3LjY4NloiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wOC0xM1QxNDoyOToxMy40NDBaIiwiX192IjowLCJpYXQiOjE2OTE5NDAyNTJ9.QmK_I4ok9yXWsW9_wBlY0NlTYv5I3AE50-zvdcGEjUg",
 									"type": "string"
 								}
 							]
@@ -1062,7 +1064,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"client_id\": \"64b38d453c5d9e4143a95b0e\",\r\n    \"factory_id\": \"1001\",\r\n    \"service_id\": \"64b27a038c21d6f0214614c4\"\r\n}",
+							"raw": "{\r\n    \"client_id\": \"64b38d453c5d9e4143a95b0e\",\r\n    \"factory_id\": \"10001\",\r\n    \"service_id\": \"64b27bf18c21d6f021461508\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1070,10 +1072,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3004/api/renew_client_subscription",
+							"raw": "http://kayhancodestore.online:3004/api/renew_client_subscription",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"kayhancodestore",
+								"online"
 							],
 							"port": "3004",
 							"path": [
@@ -1393,7 +1396,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCIsImxhc3RfbmFtZSI6IlNhaHUiLCJwaG9uZSI6Ijk4Nzg0ODE4OTAiLCJlbWFpbCI6InBhcmRlZXBzYWh1Lm5leGV2ZXJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJkYWljaGkiLCJwYXNzd29yZCI6IiQyYSQwOCRyMkczZkpqazBPdGVVYVdUWUprYTZlNFFKaThDQkRaVS84Rnh6LkgxdVlHWC94aHpQeUZsYSIsImlzX2VtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZW1haWxfdmVyaWZpZWRfYXQiOm51bGwsImlzX3RyYXNoIjpmYWxzZSwiaXNfYWN0aXZlIjp0cnVlLCJjb21wYW55X2lkIjoiMSIsImZhY3RvcnlfaWQiOiIxIiwidXNlcl90eXBlIjoiY2xpZW50IiwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMTlUMTM6MDI6MDcuNjg2WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA3LTE5VDEzOjAyOjA3LjY4N1oiLCJfX3YiOjAsImlhdCI6MTY5MTI2MzEyOX0.HlRn3DSz_o44QNXA0X_0Z0zK7cUYpOwIw62Oivv2-As",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCAiLCJsYXN0X25hbWUiOiJTYWh1IiwicGhvbmUiOiI5ODc4NDgxODkwIiwiZW1haWwiOiJwYXJkZWVwc2FodS5uZXhldmVyQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiZGFpY2hpIiwicGFzc3dvcmQiOiIkMmEkMDgkeTlWb0UvM3FvLjRwam9LOTRRZzBiLlIyODBBSEF6aEp4SWxsd3BNOHNsZXpya0o4ZXFMN20iLCJpc19lbWFpbF92ZXJpZmllZCI6ZmFsc2UsImVtYWlsX3ZlcmlmaWVkX2F0IjpudWxsLCJpc190cmFzaCI6ZmFsc2UsImlzX2FjdGl2ZSI6dHJ1ZSwiY29tcGFueV9pZCI6IjY0YjM4ZDQ1M2M1ZDllNDE0M2E5NWIwZSIsImZhY3RvcnlfaWQiOiIxMDAwMSIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTE5VDEzOjAyOjA3LjY4NloiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wOC0xM1QxNDozMDo1OS4wNzZaIiwiX192IjowLCJpYXQiOjE2OTIyMDg3NjV9.ftJ65-kvYvAiPKS66iSgF9ascjjjHZpIiSfZkDWwNUY",
 									"type": "string"
 								}
 							]
@@ -1462,7 +1465,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCB1cGRhdGVkIiwibGFzdF9uYW1lIjoiU2FodSIsInBob25lIjoiOTg3ODQ4MTg5MCIsImVtYWlsIjoicGFyZGVlcHNhaHUubmV4ZXZlckBnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImRhaWNoaSIsInBhc3N3b3JkIjoiJDJhJDA4JHIyRzNmSmprME90ZVVhV1RZSmthNmU0UUppOENCRFpVLzhGeHouSDF1WUdYL3hoelB5RmxhIiwiaXNfZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJlbWFpbF92ZXJpZmllZF9hdCI6bnVsbCwiaXNfdHJhc2giOmZhbHNlLCJpc19hY3RpdmUiOnRydWUsImNvbXBhbnlfaWQiOiIxIiwiZmFjdG9yeV9pZCI6IjEwMDAxIiwidXNlcl90eXBlIjoiY2xpZW50IiwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMTlUMTM6MDI6MDcuNjg2WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA4LTA2VDE4OjIwOjQ1LjcyNVoiLCJfX3YiOjAsImlhdCI6MTY5MTUxMTg4OH0.bI91pSOEF_f96fLXqbuwE70ncthtNWgXLAU-fOMBtfY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCAiLCJsYXN0X25hbWUiOiJTYWh1IiwicGhvbmUiOiI5ODc4NDgxODkwIiwiZW1haWwiOiJwYXJkZWVwc2FodS5uZXhldmVyQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiZGFpY2hpIiwicGFzc3dvcmQiOiIkMmEkMDgkeTlWb0UvM3FvLjRwam9LOTRRZzBiLlIyODBBSEF6aEp4SWxsd3BNOHNsZXpya0o4ZXFMN20iLCJpc19lbWFpbF92ZXJpZmllZCI6ZmFsc2UsImVtYWlsX3ZlcmlmaWVkX2F0IjpudWxsLCJpc190cmFzaCI6ZmFsc2UsImlzX2FjdGl2ZSI6dHJ1ZSwiY29tcGFueV9pZCI6IjY0YjM4ZDQ1M2M1ZDllNDE0M2E5NWIwZSIsImZhY3RvcnlfaWQiOiIxMDAwMSIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTE5VDEzOjAyOjA3LjY4NloiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wOC0xM1QxNDozMDo1OS4wNzZaIiwiX192IjowLCJpYXQiOjE2OTE5NDA1MDd9.EZ0iNQ_cI1kBHM8O5TdOrbq3Mlce2dJjavZpv3w66ZE",
 									"type": "string"
 								}
 							]
@@ -1501,7 +1504,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCB1cGRhdGVkIiwibGFzdF9uYW1lIjoiU2FodSIsInBob25lIjoiOTg3ODQ4MTg5MCIsImVtYWlsIjoicGFyZGVlcHNhaHUubmV4ZXZlckBnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImRhaWNoaSIsInBhc3N3b3JkIjoiJDJhJDA4JHIyRzNmSmprME90ZVVhV1RZSmthNmU0UUppOENCRFpVLzhGeHouSDF1WUdYL3hoelB5RmxhIiwiaXNfZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJlbWFpbF92ZXJpZmllZF9hdCI6bnVsbCwiaXNfdHJhc2giOmZhbHNlLCJpc19hY3RpdmUiOnRydWUsImNvbXBhbnlfaWQiOiI2NGIzOGQ0NTNjNWQ5ZTQxNDNhOTViMGUiLCJmYWN0b3J5X2lkIjoiMTAwMDEiLCJ1c2VyX3R5cGUiOiJjbGllbnQiLCJjcmVhdGVkX2F0IjoiMjAyMy0wNy0xOVQxMzowMjowNy42ODZaIiwidXBkYXRlZF9hdCI6IjIwMjMtMDgtMDZUMTg6MjA6NDUuNzI1WiIsIl9fdiI6MCwiaWF0IjoxNjkxODYxMDA2fQ.0pzdMu4N5RU0EVZhjpfIztK64qIfi0KhfYRNeRHq6As",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGUiLCJsYXN0X25hbWUiOiJTYWgiLCJwaG9uZSI6Ijk4Nzg0ODE4OTAiLCJlbWFpbCI6InBhcmRlZXBzYWh1Lm5leGV2ZXJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJkYWljaGkiLCJwYXNzd29yZCI6IiQyYSQwOCQzZUNvODJYaWpWWjNabDR3TXFaWER1MnNTL1o0V1BUZ3ZMWjNCcGxJVHZDMFlEeEdQb3g2bSIsImlzX2VtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZW1haWxfdmVyaWZpZWRfYXQiOm51bGwsImlzX3RyYXNoIjpmYWxzZSwiaXNfYWN0aXZlIjp0cnVlLCJjb21wYW55X2lkIjoiNjRiMzhkNDUzYzVkOWU0MTQzYTk1YjBlIiwiZmFjdG9yeV9pZCI6IjEwMDAxIiwidXNlcl90eXBlIjoiY2xpZW50IiwiY3JlYXRlZF9hdCI6IjIwMjMtMDctMTlUMTM6MDI6MDcuNjg2WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA4LTE0VDEwOjQ2OjE3LjQ0NVoiLCJfX3YiOjAsImlhdCI6MTY5MjAxMDA1Nn0.aNG1f-OvnQG5uRfsXyiMITG8YMxSWz4clpJPrfUncUg",
 									"type": "string"
 								}
 							]
@@ -1518,7 +1521,38 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3004/api/client_loss_profit_graph_data",
+							"raw": "http://kayhancodestore.online:3004/api/client_loss_profit_graph_data",
+							"protocol": "http",
+							"host": [
+								"kayhancodestore",
+								"online"
+							],
+							"port": "3004",
+							"path": [
+								"api",
+								"client_loss_profit_graph_data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile Detail",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCAiLCJsYXN0X25hbWUiOiJTYWh1IiwicGhvbmUiOiI5ODc4NDgxODkwIiwiZW1haWwiOiJwYXJkZWVwc2FodS5uZXhldmVyQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiZGFpY2hpIiwicGFzc3dvcmQiOiIkMmEkMDgkeTlWb0UvM3FvLjRwam9LOTRRZzBiLlIyODBBSEF6aEp4SWxsd3BNOHNsZXpya0o4ZXFMN20iLCJpc19lbWFpbF92ZXJpZmllZCI6ZmFsc2UsImVtYWlsX3ZlcmlmaWVkX2F0IjpudWxsLCJpc190cmFzaCI6ZmFsc2UsImlzX2FjdGl2ZSI6dHJ1ZSwiY29tcGFueV9pZCI6IjY0YjM4ZDQ1M2M1ZDllNDE0M2E5NWIwZSIsImZhY3RvcnlfaWQiOiIxMDAwMSIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTE5VDEzOjAyOjA3LjY4NloiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wOC0xM1QxNDozMDo1OS4wNzZaIiwiX192IjowLCJpYXQiOjE2OTIyMDg3NjV9.ftJ65-kvYvAiPKS66iSgF9ascjjjHZpIiSfZkDWwNUY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3004/api/profile_detail",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1526,7 +1560,7 @@
 							"port": "3004",
 							"path": [
 								"api",
-								"client_loss_profit_graph_data"
+								"profile_detail"
 							]
 						}
 					},
@@ -1602,18 +1636,18 @@
 									"type": "text"
 								},
 								{
+									"key": "email",
+									"value": "abccomputers@gmail.com",
+									"type": "text"
+								},
+								{
 									"key": "address",
 									"value": "Naza Market, Hazratganj, Lucknow, India",
 									"type": "text"
 								},
 								{
-									"key": "director_first_name",
+									"key": "director_name",
 									"value": "John",
-									"type": "text"
-								},
-								{
-									"key": "director_last_name",
-									"value": "Martin updated",
 									"type": "text"
 								},
 								{
@@ -1627,13 +1661,8 @@
 									"type": "text"
 								},
 								{
-									"key": "contact_person_first_name",
+									"key": "contact_person_name",
 									"value": "Alex",
-									"type": "text"
-								},
-								{
-									"key": "contact_person_last_name",
-									"value": "Newton updated",
 									"type": "text"
 								},
 								{
@@ -1647,14 +1676,10 @@
 									"type": "text"
 								},
 								{
-									"key": "contact_person_address",
-									"value": "Indira Nagar, Lucknow, UP, India",
-									"type": "text"
-								},
-								{
 									"key": "website",
 									"value": "www.abccomputers.com",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "establishment_type",
@@ -1689,7 +1714,8 @@
 								{
 									"key": "business_category",
 									"value": "2",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "logo",
@@ -1708,6 +1734,71 @@
 							"path": [
 								"api",
 								"update_client_business"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Common",
+			"item": [
+				{
+					"name": "Establishment Types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3004/admin/establishment_types",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3004",
+							"path": [
+								"admin",
+								"establishment_types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Type Of Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3004/admin/type_of_products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3004",
+							"path": [
+								"admin",
+								"type_of_products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Departments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3004/admin/departments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3004",
+							"path": [
+								"admin",
+								"departments"
 							]
 						}
 					},
@@ -1781,7 +1872,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGE1ODNhZDI0Y2Y2NjUxZjRlZTdkNDciLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCIsImxhc3RfbmFtZSI6IlNhaHUiLCJwaG9uZSI6Ijk4Nzg0ODE4OTAiLCJlbWFpbCI6InBhcmRlZXBzYWh1Lm5leGV2ZXJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJkYWljaGkiLCJwYXNzd29yZCI6IiQyYSQwOCRhYVloeVgvZmpzaWs2RDZtZ1RpZUl1dFFmcnhzNTdzcnFWU3VuYVgzR3pIWERQZWtkQ1o0NiIsImlzX2VtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiaXNfdHJhc2giOmZhbHNlLCJpc19hY3RpdmUiOnRydWUsImNvbXBhbnlfaWQiOiI2NGIzOGQ0NTNjNWQ5ZTQxNDNhOTViMGUiLCJmYWN0b3J5X2lkIjoiMSIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTA1VDE0OjUyOjMwLjAxMloiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wNy0wNVQxNDo1MjozMC4wMTNaIiwiX192IjowLCJpYXQiOjE2OTA5ODY2Mjh9.XR2BqnhLcxn7GlqGRivr-kUwWPDoRSBIm0gVN5adh6o",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3ZGVjZmM4MjM5MTQ0MjQ4YTViNTQiLCJmaXJzdF9uYW1lIjoiUGFyZGVlcCIsImxhc3RfbmFtZSI6IlNhaHUiLCJwaG9uZSI6Ijk4Nzg0ODE4OTAiLCJlbWFpbCI6InBhcmRlZXBzYWh1Lm5leGV2ZXJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJkYWljaGkiLCJwYXNzd29yZCI6IiQyYSQwOCRyMkczZkpqazBPdGVVYVdUWUprYTZlNFFKaThDQkRaVS84Rnh6LkgxdVlHWC94aHpQeUZsYSIsImlzX2VtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZW1haWxfdmVyaWZpZWRfYXQiOm51bGwsImlzX3RyYXNoIjpmYWxzZSwiaXNfYWN0aXZlIjp0cnVlLCJjb21wYW55X2lkIjoiMSIsImZhY3RvcnlfaWQiOiIxMDAwMSIsInVzZXJfdHlwZSI6ImNsaWVudCIsImNyZWF0ZWRfYXQiOiIyMDIzLTA3LTE5VDEzOjAyOjA3LjY4NloiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wNy0xOVQxMzowMjowNy42ODdaIiwiX192IjowLCJpYXQiOjE2OTE5MTE4MjV9.5WNOJtKWOLAFZVTzKZ7HliGXSh9TvqrFPU2_LuSEZs4",
 							"type": "string"
 						}
 					]
@@ -1790,7 +1881,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"old_password\": \"1234567\",\r\n    \"new_password\": \"123456\"\r\n}",
+					"raw": "{\r\n    \"old_password\": \"Mirza@123\",\r\n    \"new_password\": \"123456\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1798,9 +1889,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3004/api/update_password",
+					"raw": "http://.localhost:3004/api/update_password",
 					"protocol": "http",
 					"host": [
+						"",
 						"localhost"
 					],
 					"port": "3004",

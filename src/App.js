@@ -20,6 +20,13 @@ import CreateOrder from "./component/order/CreateOrder";
 import Orderdetails from "./component/order/Orderdetails";
 import AddOns from "./component/add-on/AddOns";
 import AddOnsHistory from "./component/add-on/AddOnsHistory";
+import LossProfit from "./component/loss_profit/LossProfit";
+import ChangePassword from "./component/change_password/ChangePassword";
+import Profile from "./component/profile/Profile";
+import Messages from "./component/messages/Messages";
+import BusinessSettings from "./component/business_settings/BusinessSettings";
+import Setting from "./component/business_settings/Setting";
+import MessagesDetails from "./component/messages/MessagesDetails";
 export const GlobalContext = createContext(null);
 
 function App() {
@@ -71,7 +78,6 @@ function App() {
                   path='/order/manual-order-input/create-order'
                   element={<CreateOrder />}
                 />
-
                 <Route
                   path='/order/manual-order-input/order-details/:id'
                   element={<Orderdetails />}
@@ -81,6 +87,19 @@ function App() {
                   path='/add-ons/add-ons-history'
                   element={<AddOnsHistory />}
                 />
+                <Route path='/messages' element={<Messages />} />
+                <Route
+                  path='/messages/message-details'
+                  element={<MessagesDetails />}
+                />
+                <Route
+                  path='/business_settings'
+                  element={<BusinessSettings />}
+                />
+                <Route path='/settings' element={<Setting />} />
+                <Route path='/loss-profit' element={<LossProfit />} />
+                <Route path='/change_password' element={<ChangePassword />} />
+                <Route path='/profile' element={<Profile />} />
               </Route>
             </Routes>
           ) : (

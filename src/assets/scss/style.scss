@@ -42,10 +42,10 @@
 .show-modal {
   align-items: center;
   display: flex;
-  min-height: calc(100% - var(--bs-modal-margin)*2);
+  min-height: calc(100% - var(--bs-modal-margin) * 2);
   --bs-backdrop-zindex: 1050;
   --bs-backdrop-bg: #0003;
-  --bs-backdrop-opacity: .5;
+  --bs-backdrop-opacity: 0.5;
   background-color: var(--bs-backdrop-bg);
   height: 100vh;
   left: 0;
@@ -53,5 +53,41 @@
   top: 0;
   width: 100vw;
   z-index: var(--bs-backdrop-zindex);
+}
+.form-group-append {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.7rem;
+  img {
+    cursor: pointer;
+    width: 19px;
+  }
+}
+.modal-checkbox {
+  align-items: center;
+  margin-left: 3px;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  opacity: 1;
+  cursor: pointer;
+  .tooltiptext {
+    visibility: hidden;
+    width: fit-content;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    white-space: nowrap;
+    margin-left: 10px;
 
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  &:hover .tooltiptext {
+    visibility: visible;
+  }
 }

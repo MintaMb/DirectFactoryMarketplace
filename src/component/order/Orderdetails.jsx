@@ -143,7 +143,6 @@ const Orderdetails = () => {
                                   <th> SL</th>
                                   <th>Item Details</th>
                                   <th>Qty.</th>
-                                  <th>Tax</th>
                                   <th>Price</th>
                                   <th>Total</th>
                                 </tr>
@@ -160,7 +159,6 @@ const Orderdetails = () => {
                                             ? "1"
                                             : item?.quantity}
                                         </td>
-                                        <td>-</td>
                                         <td>
                                           {item?.product_price
                                             ? item?.product_price

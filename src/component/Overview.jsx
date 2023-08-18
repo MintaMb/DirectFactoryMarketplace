@@ -19,7 +19,6 @@ const Overview = () => {
   const postSuggestion = async (data, id) => {
     setSpinner(true);
     let userData = JSON.parse(localStorage.getItem("userData"));
-    console.log(userData?.company_id, "userData");
     try {
       const formattedData = {
         factory_id: userData?.factory_id,
@@ -57,7 +56,6 @@ const Overview = () => {
   const restApiGetDasboardData = async () => {
     setSpinner(true);
     let userData = JSON.parse(localStorage.getItem("userData"));
-    console.log(userData?.company_id, "userData");
     try {
       const formattedData = {
         factory_id: userData?.factory_id,
@@ -74,11 +72,9 @@ const Overview = () => {
           body: JSON.stringify(formattedData),
         }
       );
-      console.log(formattedData, "response?.data");
       const responseData = await response.json(); // Always parse the response data as JSON
       if (response.status === 200) {
         const overviewData = responseData.data || [""];
-        console.log(responseData.data, "responseData.data");
         reset(); // Define the reset() function
         setDashboardData(overviewData);
       } else {
@@ -95,7 +91,6 @@ const Overview = () => {
   useEffect(() => {
     restApiGetDasboardData();
   }, []);
-  console.log(dashboardData, "dashboardData");
   return (
     <>
       <div id='wrapper'>
@@ -249,7 +244,12 @@ const Overview = () => {
                       <div className='widget-rounded-circle card'>
                         <div className='card-body'>
                           <h4 className='mb-0'>Net Position</h4>
-                          <p className='mb-2 text-end'>4545</p>
+                          <p className='mb-2 text-end'>
+                            {" "}
+                            {dashboardData?.net_position?.client_rank
+                              ? dashboardData?.net_position?.client_rank
+                              : "0"}
+                          </p>
                           <button className='btn btn-primary waves-effect waves-light btn-sm float-end mb-3'>
                             See details
                           </button>
@@ -284,6 +284,7 @@ const Overview = () => {
                                     {...field}
                                     className='form-control'
                                     rows={4}
+                                    placeholder='Have a Suggetions ? Type here...'
                                   />
                                   {errors.suggestion_message && (
                                     <p className='text-danger'>Required!</p>

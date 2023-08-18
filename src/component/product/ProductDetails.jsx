@@ -66,18 +66,23 @@ const ProductDetails = () => {
                       <div className='row'>
                         <div className='col-lg-2'>
                           <img
-                            src={placeholder}
+                            src={
+                              productDetailData?.product_images?.length > 0
+                                ? productDetailData?.product_images[0]?.image
+                                : placeholder
+                            }
                             className='img img-thumbnail'
+                            alt='pro img'
                           />
+
+                          {console.log(
+                            productDetailData?.product_images,
+                            "productDetailData?.product_images "
+                          )}
                         </div>
                         <div className='col-lg-10'>
-                          <h4>Comic Book</h4>
-                          <p className='mb-1'>
-                            <strong>Product Category: </strong>{" "}
-                            {productDetailData?.name
-                              ? productDetailData?.name
-                              : "-"}
-                          </p>
+                          <h4>{productDetailData?.name}</h4>
+
                           <p className='mb-1'>
                             <strong>Product SKU: </strong>{" "}
                             {productDetailData?.sku
@@ -85,11 +90,18 @@ const ProductDetails = () => {
                               : "-"}
                           </p>
                           <p className='mb-1'>
-                            <strong>Product Brand: </strong>{" "}
-                            {productDetailData?.brand
-                              ? productDetailData?.brand
+                            <strong> Cost Price: </strong>{" "}
+                            {productDetailData?.cost
+                              ? productDetailData?.cost
                               : "-"}
                           </p>
+                          <p className='mb-1'>
+                            <strong>Sale Price: </strong>{" "}
+                            {productDetailData?.sale_price
+                              ? productDetailData?.sale_price
+                              : "-"}
+                          </p>
+
                           <p className='mb-1'>
                             <strong>Product Unit : </strong>{" "}
                             {productDetailData?.unit
@@ -100,27 +112,13 @@ const ProductDetails = () => {
                             <strong>Total Capacity/Available Stock : </strong>{" "}
                             {productDetailData?.capacity
                               ? productDetailData?.capacity
-                              : "-"}
+                              : "0"}
                             /
                             {productDetailData?.stock
                               ? productDetailData?.stock
-                              : "-"}
+                              : "0"}
                           </p>
                         </div>
-
-                        <p className='mb-1'>
-                          <strong>Product Variants : </strong>
-                          {/* {productDetailData?.variations?.map((index,item)=>{
-                              
-                              <span>{item}</span>
-                              
-                            })} */}
-                          <span>
-                            {productDetailData?.variations?.[0]?.name
-                              ? productDetailData?.variations?.[0]?.name
-                              : "No variants "}
-                          </span>
-                        </p>
                         <div className='col-lg-12 mt-2'>
                           <div class='table-responsive'>
                             <table class='table border'>
@@ -133,17 +131,17 @@ const ProductDetails = () => {
                                   <th>Stock</th>
                                 </tr>
                               </thead>
-                              {productDetailData.length > 0 ? (
+                              {productDetailData?.variations?.length > 0 ? (
                                 <tbody>
                                   {productDetailData?.variations?.map(
                                     (item, index) => {
                                       return (
                                         <tr>
-                                          <td>Small Green</td>
-                                          <td>SM-GREEN</td>
-                                          <td>300</td>
-                                          <td>500</td>
-                                          <td>20</td>
+                                          <td>{item?.name}</td>
+                                          <td>{item?.sku}</td>
+                                          <td>{item?.cost_price}</td>
+                                          <td>{item?.sale_price}</td>
+                                          <td>{item?.sku}</td>
                                         </tr>
                                       );
                                     }
