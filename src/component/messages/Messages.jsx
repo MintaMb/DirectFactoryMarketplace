@@ -62,29 +62,26 @@ const Messages = () => {
   console.log(messageList, "messageList");
   // ================== add messages api
   const addMessages = async (data) => {
-    console.log(data, "data");
     setSpinner(true);
     let userData = JSON.parse(localStorage.getItem("userData"));
     let token = localStorage.getItem("Token");
-    console.log(data, "hah");
-    const formData = new FormData();
-    // formData.append("subject", watch()?.subject);
-    // formData.append("description", watch()?.description);
-    formData.append("subject", "Hardcoded Subject");
-    formData.append("description", "Hardcoded Description");
-    formData.append("receiver_id", "64c7c0171543f388134844d9"); // Update receiver_id as needed
-    formData.append("company_id", userData?.company_id);
-    console.log(watch(), "watch");
     try {
+      const formData = new FormData();
+      formData.append("subject", data.subject);
+      formData.append("description", data.description);
+      formData.append("receiver_id", "64c7c0171543f388134844d9"); // Update receiver_id as needed
+      formData.append("company_id", userData?.company_id);
+
       const response = await fetch(
         `${process.env.REACT_APP_BASE_URL}/api/client_send_message`,
         {
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${localStorage.getItem("Token")}`,
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           method: "POST",
-          body: formData,
+          body: JSON.stringify(formData), // Serialize formData into JSON
         }
       );
 
@@ -93,7 +90,7 @@ const Messages = () => {
       if (response.status === 200) {
         setSpinner(false);
         setMessageList((prevList) => [...prevList, responseData.data]);
-        hideModal(); // Close the modal after successful submission
+        hideModal();
         toast.success("Message sent successfully");
       } else if (response.status >= 400) {
         toast.error(responseData.message, {
