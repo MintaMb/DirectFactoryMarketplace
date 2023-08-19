@@ -415,12 +415,20 @@ const BusinessSettings = () => {
                         </div>
                         <div className='col-lg-4 mb-2'>
                           <label>Existing Market </label>
-                          <input
-                            type='text'
-                            className='form-control'
-                            placeholder='Existing Market'
-                            {...register("existing_market", { required: true })}
-                          />
+                          <select
+                            className='form-select'
+                            {...register("existing_market")}
+                            value={watch("existing_market")}>
+                            {/* country Listing ===================================================================  */}
+                            <option value=''>Select Country</option>
+                            {countries?.map((item, index) => {
+                              return (
+                                <option key={index} value={item?.name}>
+                                  {item?.name}
+                                </option>
+                              );
+                            })}
+                          </select>
                           {errors?.existing_market?.type === "required" && (
                             <p role='alert' className='alert-msg text-danger'>
                               Existing market is required

@@ -28,7 +28,6 @@ const CreateProduct = () => {
     // return
     try {
       let formData = new FormData();
-
       id && formData.append("product_id", id);
       formData.append("name", watch()?.name ? watch()?.name : "");
       formData.append("description", watch()?.description);
