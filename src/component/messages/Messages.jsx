@@ -62,26 +62,26 @@ const Messages = () => {
   console.log(messageList, "messageList");
   // ================== add messages api
   const addMessages = async (data) => {
+    console.log(data, "data");
     setSpinner(true);
-
-    // Modify the following lines to get sender_id and company_id from your data source
-    let sender_id = "64b7decfc8239144248a5b54"; // Replace with the actual sender_id
-    let receiver_id = "111111111111"; // Replace with the actual receiver_id
+    let userData = JSON.parse(localStorage.getItem("userData"));
     let token = localStorage.getItem("Token");
-
+    console.log(data, "hah");
     const formData = new FormData();
-    formData.append("sender_id", sender_id);
-    formData.append("receiver_id", receiver_id);
-    formData.append("subject", data.subject);
-    formData.append("description", data.description);
-
+    // formData.append("subject", watch()?.subject);
+    // formData.append("description", watch()?.description);
+    formData.append("subject", "Hardcoded Subject");
+    formData.append("description", "Hardcoded Description");
+    formData.append("receiver_id", "64c7c0171543f388134844d9"); // Update receiver_id as needed
+    formData.append("company_id", userData?.company_id);
+    console.log(watch(), "watch");
     try {
       const response = await fetch(
         `${process.env.REACT_APP_BASE_URL}/api/client_send_message`,
         {
           headers: {
             Accept: "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${localStorage.getItem("Token")}`,
           },
           method: "POST",
           body: formData,
@@ -93,7 +93,7 @@ const Messages = () => {
       if (response.status === 200) {
         setSpinner(false);
         setMessageList((prevList) => [...prevList, responseData.data]);
-        hideModal();
+        hideModal(); // Close the modal after successful submission
         toast.success("Message sent successfully");
       } else if (response.status >= 400) {
         toast.error(responseData.message, {
@@ -104,32 +104,8 @@ const Messages = () => {
       setSpinner(false);
     }
   };
-  const MessageForm = ({ addMessages }) => {
-    const [formData, setFormData] = useState({
-      sender_id: "64b7decfc8239144248a5b54",
-      receiver_id: "64c7c0171543f388134844d9",
-      subject: "",
-      description: "",
-    });
 
-    const handleInputChange = (event) => {
-      const { name, value } = event.target;
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    };
-
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      addMessages(formData);
-      setFormData({
-        ...formData,
-        subject: "",
-        description: "",
-      });
-    };
-  };
+  console.log(watch(), "haha");
   return (
     <>
       <div id='wrapper'>
@@ -215,7 +191,9 @@ const Messages = () => {
             <div className='modal-dialog'>
               <div className='modal-content'>
                 <div className='modal-body'>
-                  <form className='px-3 row' onSubmit={handleSubmit}>
+                  <form
+                    className='px-3 row'
+                    onSubmit={handleSubmit(addMessages)}>
                     <div className='mb-2 col-lg-12'>
                       <h4 className='text-center'>Send Message</h4>
                     </div>
