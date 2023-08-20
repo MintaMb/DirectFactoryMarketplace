@@ -5,6 +5,7 @@ import { GlobalContext } from "../../App";
 import { toast } from "react-toastify";
 import moment from "moment";
 import NoData from "../common-component/NoData";
+import Spinner from "../common-component/Spinner";
 
 const Messages = () => {
   const {
@@ -18,7 +19,6 @@ const Messages = () => {
   } = useForm({ mode: "all" });
   const { setSpinner, spinner } = useContext(GlobalContext);
   const [messageList, setMessageList] = useState([]);
-  const [businessLogo, setBusinessLogo] = useState(null);
   // modal show/Hide  functions
   const [modalShow, setShowModal] = useState(false);
   const showModal = () => {
@@ -59,7 +59,6 @@ const Messages = () => {
   useEffect(() => {
     userMessage();
   }, []);
-  console.log(messageList, "messageList");
   // ================== add messages api
   const addMessages = async (data) => {
     setSpinner(true);
@@ -71,17 +70,22 @@ const Messages = () => {
       formData.append("description", data.description);
       formData.append("receiver_id", "64c7c0171543f388134844d9"); // Update receiver_id as needed
       formData.append("company_id", userData?.company_id);
-
+      if (data.attachments && data.attachments.length > 0) {
+        for (const file of data.attachments) {
+          formData.append('attachments', file);
+        }
+      }
+  
       const response = await fetch(
         `${process.env.REACT_APP_BASE_URL}/api/client_send_message`,
         {
           headers: {
             Accept: "application/json",
-            "Content-Type": "application/json",
+            // "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
           method: "POST",
-          body: JSON.stringify(formData), // Serialize formData into JSON
+          body: formData, // Serialize formData into JSON
         }
       );
 
@@ -89,7 +93,9 @@ const Messages = () => {
 
       if (response.status === 200) {
         setSpinner(false);
+        userMessage();
         setMessageList((prevList) => [...prevList, responseData.data]);
+        reset();
         hideModal();
         toast.success("Message sent successfully");
       } else if (response.status >= 400) {
@@ -105,6 +111,7 @@ const Messages = () => {
   console.log(watch(), "haha");
   return (
     <>
+    {spinner && <Spinner/>}
       <div id='wrapper'>
         <div className='content-page'>
           <div className='content'>
@@ -149,15 +156,15 @@ const Messages = () => {
                                       <tr>
                                         <th width='20%'>
                                           <Link to='message-details'>
-                                            {item?.first_name}
+                                            {item?.subject}
                                           </Link>
                                         </th>
-                                        <td>{item?.address}</td>
+                                        <td>{item?.description}</td>
                                         <th width='10%'>
                                           {moment(item?.created_at).format(
                                             "DD MMM YYYY  h:mm A"
                                           )}
-                                          M
+                                          
                                         </th>
                                       </tr>
                                     </>
@@ -231,14 +238,24 @@ const Messages = () => {
                       />
                     </div>
                     <div className='mb-2 col-lg-12'>
-                      <input type='file' className='form-control' />
+                      <input type='file' className='form-control'     multiple
+    {...register('attachments')}
+ />
                     </div>
-                    <div className='col-lg-4 mx-auto'>
-                      <button
-                        className='btn btn-primary w-100 mt-3 mb-2'
+                    <div className='mb-3 col-lg-12 text-center'>
+                    <button
+                        className='btn btn-primary me-3 w-40   mt-3 mb-2'
                         type='submit'
                         onClick={() => {
-                          reset();
+                          hideModal();
+                        }}>
+                        Close
+                      </button>
+                      <button
+                        className='btn btn-primary w-40  mt-3 mb-2'
+                        type='submit'
+                        onClick={() => {
+                          // reset();
                         }}>
                         Submit
                       </button>
